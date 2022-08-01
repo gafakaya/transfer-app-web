@@ -1,26 +1,19 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@layer base {
+  :root {
+    @apply font-sans;
+    --color-text-primary: 28, 28, 30;
+    --color-text-secondary: 174, 174, 178;
 
-* {
-  box-sizing: border-box;
-}
+    --color-background-primary: 216, 216, 220;
+    --color-background-secondary: 54, 54, 56;
+    --color-background-tertiary: 68, 68, 70;
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
+    --color-red: 255, 68, 58;
+    --color-yellow: 221, 180, 29;
+    --color-blue: 50, 173, 230;
   }
 }
