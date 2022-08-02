@@ -1,6 +1,8 @@
+import { RefreshIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { Button } from "../components/tags";
 
 const Home: NextPage = () => {
   return (
@@ -13,6 +15,12 @@ const Home: NextPage = () => {
 
       <main>
         <div className="text-2xl">Init</div>
+        <br />
+        <Button
+          LeftIcon={RefreshIcon}
+          title="Round Trip"
+          className="border-2 border-opacity-0 hover:border-opacity-100"
+        />
       </main>
     </div>
   );

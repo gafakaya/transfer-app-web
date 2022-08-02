@@ -17,7 +17,6 @@ const Header = (props: Props) => {
     >
       <div className="flex justify-between items-center px-3 lg:px-0 mx-auto md:max-w-5xl">
         <Image
-          className={`hover:animate-pulse`}
           src={`/logo.svg`}
           width={`150`}
           height={`45`}
