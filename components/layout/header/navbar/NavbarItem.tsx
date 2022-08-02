@@ -17,8 +17,8 @@ const NavbarItem = ({ Icon, title, route }: NavbarItemProps) => {
       ${router.asPath === `${route}` ? "border-opacity-100" : ""}
       p-1`}
     >
-      <Icon className="h-5" />
-      <div className="text-sm select-none">{title}</div>
+      <Icon className="h-[22px] sm:h-5" />
+      <div className="hidden sm:flex text-sm select-none">{title}</div>
     </div>
   );
 };
