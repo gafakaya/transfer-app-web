@@ -6,14 +6,19 @@
   :root {
     @apply font-sans;
     --color-text-primary: 28, 28, 30;
-    --color-text-secondary: 174, 174, 178;
+    --color-text-secondary: 42, 42, 44;
 
     --color-background-primary: 216, 216, 220;
-    --color-background-secondary: 54, 54, 56;
-    --color-background-tertiary: 68, 68, 70;
+    --color-background-secondary: 198, 198, 198;
+    --color-background-tertiary: 170, 170, 170;
 
     --color-red: 255, 68, 58;
     --color-yellow: 221, 180, 29;
     --color-blue: 50, 173, 230;
   }
+}
+
+.map-container {
+  width: 100%;
+  height: 50vh;
 }
