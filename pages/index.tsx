@@ -1,19 +1,8 @@
-import { RefreshIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  decrement,
-  increment,
-  selectCounterValue,
-} from "../src/redux/slices/counterSlice";
-import { Button } from "../components/tags";
-import OriginModule from "../components/reservation/origin/OriginModule";
+import Reservation from "../components/reservation/Reservation";
 
 const Home: NextPage = () => {
-  const count = useSelector(selectCounterValue);
-  const dispatch = useDispatch();
-
   return (
     <div>
       <Head>
@@ -23,7 +12,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <OriginModule />
+        <Reservation />
       </main>
     </div>
   );

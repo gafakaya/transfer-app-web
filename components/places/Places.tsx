@@ -1,23 +1,41 @@
-import { useState, Fragment } from "react";
+import { MutableRefObject, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, LocationMarkerIcon } from "@heroicons/react/outline";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
+import { useAppDispatch, useAppSelector } from "../../src/hooks/reduxHooks";
+import {
+  selectDestination,
+  selectOrigin,
+  setDestination,
+  setDirections,
+  setOrigin,
+} from "../../src/redux/slices/navSlice";
+import { GoogleMap } from "@react-google-maps/api";
+import { DirectionsResult } from "../../src/types/googleMaps";
 
 type PlacesProps = {
-  setOrigin: (position: google.maps.LatLngLiteral) => void;
+  locType: "origin" | "destination";
+  mapRef: MutableRefObject<GoogleMap | undefined>;
 };
 
-const Places = ({ setOrigin }: PlacesProps) => {
+const Places = ({ locType, mapRef }: PlacesProps) => {
   const {
     ready,
     value,
     setValue,
     suggestions: { status, data },
     clearSuggestions,
-  } = usePlacesAutocomplete();
+  } = usePlacesAutocomplete({
+    requestOptions: { componentRestrictions: { country: "TR" } },
+    debounce: 600,
+  });
+
+  const origin = useAppSelector(selectOrigin);
+  const destination = useAppSelector(selectDestination);
+  const dispatch = useAppDispatch();
 
   const handleSelect = async (val: string) => {
     setValue(val, false);
@@ -25,7 +43,12 @@ const Places = ({ setOrigin }: PlacesProps) => {
 
     const results = await getGeocode({ address: val });
     const { lat, lng } = await getLatLng(results[0]);
-    setOrigin({ lat, lng });
+    if (locType !== "origin") {
+      dispatch(setDestination({ lat, lng }));
+    } else {
+      dispatch(setOrigin({ lat, lng }));
+      mapRef.current?.panTo({ lat, lng });
+    }
   };
 
   return (

@@ -1,21 +1,45 @@
-import { useState, useMemo, useCallback, MutableRefObject } from "react";
-import { GoogleMap, Marker, DirectionsRenderer } from "@react-google-maps/api";
+import {
+  useState,
+  useMemo,
+  useCallback,
+  MutableRefObject,
+  useEffect,
+} from "react";
+import {
+  GoogleMap,
+  Marker,
+  DirectionsRenderer,
+  Circle,
+} from "@react-google-maps/api";
 import { Places } from "../places";
+import {
+  DirectionsResult,
+  LatLngLiteral,
+  MapOptions,
+} from "../../src/types/googleMaps";
+import {
+  selectDestination,
+  selectDirections,
+  selectOrigin,
+  setDirections,
+} from "../../src/redux/slices/navSlice";
+import { useAppDispatch, useAppSelector } from "../../src/hooks/reduxHooks";
+import { ArrowRightIcon } from "@heroicons/react/outline";
+import { Button } from "../tags";
 // import Distance from "./distance";
-
-type LatLngLiteral = google.maps.LatLngLiteral;
-type DirectionsResult = google.maps.DirectionsResult;
-type MapOptions = google.maps.MapOptions;
 
 type MapProps = {
   mapRef: MutableRefObject<GoogleMap | undefined>;
-  origin: LatLngLiteral | undefined;
 };
 
-export default function Map({ mapRef, origin }: MapProps) {
-  const [direction, setDirection] = useState<DirectionsResult>();
+export default function Map({ mapRef }: MapProps) {
+  const origin = useAppSelector(selectOrigin);
+  const destination = useAppSelector(selectDestination);
+  const directions = useAppSelector(selectDirections);
+  const dispatch = useAppDispatch();
+
   const center = useMemo<LatLngLiteral>(
-    () => ({ lat: 43.45, lng: -80.49 }),
+    () => ({ lat: 38.4145, lng: 27.1441 }),
     []
   );
   const options = useMemo<MapOptions>(
@@ -26,21 +50,22 @@ export default function Map({ mapRef, origin }: MapProps) {
     []
   );
 
-  const onLoad = useCallback((map: any) => (mapRef.current = map), []);
+  const onLoad = useCallback((map: any) => (mapRef.current = map), [mapRef]);
 
-  const fetchDirections = (direction: LatLngLiteral) => {
+  const fetchDirections = () => {
     if (!origin) return;
+    if (!destination) return;
 
     const service = new google.maps.DirectionsService();
     service.route(
       {
         origin: origin,
-        destination: direction,
+        destination: destination,
         travelMode: google.maps.TravelMode.DRIVING,
       },
       (result, status) => {
         if (status === "OK" && result) {
-          setDirection(result);
+          dispatch(setDirections(result));
         }
       }
     );
@@ -55,28 +80,36 @@ export default function Map({ mapRef, origin }: MapProps) {
         options={options}
         onLoad={onLoad}
       >
-        {direction && (
+        {directions && (
           <DirectionsRenderer
-            directions={direction}
+            directions={directions}
             options={{
               polylineOptions: {
-                zIndex: 50,
-                strokeColor: "#1976D2",
+                zIndex: 500,
+                strokeColor: "#202020",
                 strokeWeight: 5,
               },
+              markerOptions: {},
             }}
           />
         )}
 
         {origin && (
-          <>
-            <Marker
-              position={origin}
-              icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-            />
-          </>
+          <Marker
+            position={origin}
+            icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+          />
+        )}
+        {destination && (
+          <Marker
+            position={destination}
+            icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+          />
         )}
       </GoogleMap>
+      <div className="w-fit" onClick={() => fetchDirections()}>
+        <Button title="Create Directions" />
+      </div>
     </div>
   );
 }
