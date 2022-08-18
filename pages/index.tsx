@@ -1,8 +1,30 @@
+import { LoginIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Reservation from "../components/reservation/Reservation";
+import { useEffect } from "react";
+import { Reservation } from "../components/reservation";
+import { Button } from "../components/tags";
+import { useAppDispatch, useAppSelector } from "../src/hooks/reduxHooks";
+import { selectUser, setUser } from "../src/redux/slices/userSlice";
+import userMe from "../src/services/users/user-me";
 
 const Home: NextPage = () => {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
+
+  useEffect(() => {
+    if (user == null) {
+      const userCall = async () => {
+        const result = await userMe();
+        dispatch(setUser(result?.data));
+      };
+      userCall();
+    }
+  }, [user, dispatch]);
+
+
+  console.log(user)
+
   return (
     <div>
       <Head>
@@ -12,6 +34,16 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
+        {!user && (
+          <div className="flex flex-row items-center gap-2">
+            <div>
+              <Button title="Login" type="button" LeftIcon={LoginIcon} />
+            </div>
+            <div>
+              <Button title="Signup" type="button" />
+            </div>
+          </div>
+        )}
         <Reservation />
       </main>
     </div>

@@ -21,7 +21,7 @@ const Header = (props: Props) => {
           width={`150`}
           height={`45`}
           alt={`memorytel-logo`}
-          onClick={() => router.push("/home")}
+          onClick={() => router.push("/")}
         ></Image>
         <div className="flex">
           <Navbar />

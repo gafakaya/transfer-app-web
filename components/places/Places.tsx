@@ -1,7 +1,7 @@
-import { MutableRefObject, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, LocationMarkerIcon } from "@heroicons/react/outline";
 import usePlacesAutocomplete, {
+  getDetails,
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
@@ -10,18 +10,13 @@ import {
   selectDestination,
   selectOrigin,
   setDestination,
-  setDirections,
   setOrigin,
 } from "../../src/redux/slices/navSlice";
-import { GoogleMap } from "@react-google-maps/api";
-import { DirectionsResult } from "../../src/types/googleMaps";
-
 type PlacesProps = {
   locType: "origin" | "destination";
-  mapRef: MutableRefObject<GoogleMap | undefined>;
 };
 
-const Places = ({ locType, mapRef }: PlacesProps) => {
+const Places = ({ locType }: PlacesProps) => {
   const {
     ready,
     value,
@@ -44,10 +39,21 @@ const Places = ({ locType, mapRef }: PlacesProps) => {
     const results = await getGeocode({ address: val });
     const { lat, lng } = await getLatLng(results[0]);
     if (locType !== "origin") {
-      dispatch(setDestination({ lat, lng }));
+      dispatch(
+        setDestination({
+          latLng: { lat, lng },
+          placeId: results[0].place_id,
+          name: results[0].formatted_address,
+        })
+      );
     } else {
-      dispatch(setOrigin({ lat, lng }));
-      mapRef.current?.panTo({ lat, lng });
+      dispatch(
+        setOrigin({
+          latLng: { lat, lng },
+          placeId: results[0].place_id,
+          name: results[0].formatted_address,
+        })
+      );
     }
   };
 
@@ -75,7 +81,7 @@ const Places = ({ locType, mapRef }: PlacesProps) => {
             leaveFrom="transform scale-100 opacity-100"
             leaveTo="transform scale-95 opacity-0"
           >
-            <Combobox.Options static>
+            <Combobox.Options className={"absolute"} static>
               {status === "OK" &&
                 data.map(({ place_id, description }) => (
                   <Combobox.Option key={place_id} value={description}>
