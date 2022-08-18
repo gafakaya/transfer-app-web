@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import React from "react";
-import { SelectVehicle } from "../../components/reservation/vehicle";
+import { SelectVehicle } from "../../components/reservation";
 
 type Props = {};
 
