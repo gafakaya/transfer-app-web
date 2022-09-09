@@ -4,14 +4,17 @@ import {
   updateRefreshToken,
 } from "../../handlers/tokensHandler";
 
-type signupDataType = {
+export type SignupDataType = {
   email: string;
   firstName: string;
   lastName: string;
   password: string;
+  phoneNumber: string;
+  phoneIdd: string;
+  trId: string;
 };
 
-const localSignup = async (signupData: signupDataType) => {
+const localSignup = async (signupData: SignupDataType) => {
   try {
     const response = await api.post("/auth/local/signup", signupData);
     updateAccessToken(response.data.access_token);

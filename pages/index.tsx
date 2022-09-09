@@ -1,6 +1,7 @@
 import { LoginIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import Head from "next/head";
+import {useRouter} from "next/router";
 import { useEffect } from "react";
 import { Reservation } from "../components/reservation";
 import { Button } from "../components/tags";
@@ -11,6 +12,7 @@ import userMe from "../src/services/users/user-me";
 const Home: NextPage = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const router = useRouter();
 
   useEffect(() => {
     if (user == null) {
@@ -21,9 +23,6 @@ const Home: NextPage = () => {
       userCall();
     }
   }, [user, dispatch]);
-
-
-  console.log(user)
 
   return (
     <div>
@@ -36,10 +35,10 @@ const Home: NextPage = () => {
       <main>
         {!user && (
           <div className="flex flex-row items-center gap-2">
-            <div>
+            <div onClick={() => router.push("/auth/signin")}>
               <Button title="Login" type="button" LeftIcon={LoginIcon} />
             </div>
-            <div>
+            <div onClick={() => router.push("/auth/signup")}>
               <Button title="Signup" type="button" />
             </div>
           </div>

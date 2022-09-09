@@ -12,6 +12,7 @@ type NavState = {
   origin: Loc | null;
   destination: Loc | null;
   timestamp: number | null;
+  returnTimestamp: number | null;
   stage: "origin" | "destination" | "date";
   directions: DirectionsResult | null;
 };
@@ -20,6 +21,7 @@ const initialState: NavState = {
   origin: null,
   destination: null,
   timestamp: null,
+  returnTimestamp: null,
   stage: "origin",
   directions: null,
 };
@@ -37,6 +39,9 @@ export const navSlice = createSlice({
     setTimestamp: (state, action: PayloadAction<number>) => {
       state.timestamp = action.payload;
     },
+    setReturnTimestamp: (state, action: PayloadAction<number>) => {
+      state.returnTimestamp = action.payload;
+    },
     setStage: (state, action: PayloadAction<"origin" | "destination">) => {
       state.stage = action.payload;
     },
@@ -50,6 +55,7 @@ export const {
   setOrigin,
   setDestination,
   setTimestamp,
+  setReturnTimestamp,
   setStage,
   setDirections,
 } = navSlice.actions;
@@ -57,6 +63,8 @@ export const {
 export const selectOrigin = (state: RootState) => state.nav.origin;
 export const selectDestination = (state: RootState) => state.nav.destination;
 export const selectTimestamp = (state: RootState) => state.nav.timestamp;
+export const selectReturnTimestamp = (state: RootState) =>
+  state.nav.returnTimestamp;
 export const selectState = (state: RootState) => state.nav.stage;
 export const selectDirections = (state: RootState) => state.nav.directions;
 

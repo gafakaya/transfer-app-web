@@ -34,7 +34,7 @@ const Button = ({
       border-2 border-skin-primary
       select-none cursor-pointer
       transition-all duration-200
-      ${hover} ${className}`}
+      ${hover ? hover : "hover:text-white hover:bg-black"} ${className}`}
       onSubmit={() => onSubmit}
       onClick={() => onClick}
       type={type}

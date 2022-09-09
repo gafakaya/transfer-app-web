@@ -24,6 +24,8 @@ import { Button } from "../../tags";
 import { H2 } from "../../tags/headings";
 import moment from "moment";
 import { timeStamp } from "console";
+import { selectUser } from "../../../src/redux/slices/userSlice";
+import VehicleModule from "./VehicleModule";
 
 type Props = {};
 
@@ -33,6 +35,7 @@ const SelectVehicle = (props: Props) => {
   const origin = useAppSelector(selectOrigin);
   const destination = useAppSelector(selectDestination);
   const timestamp = useAppSelector(selectTimestamp);
+  const user = useAppSelector(selectUser);
   const router = useRouter();
   const [date, setDate] = useState<Date>();
 
@@ -52,6 +55,11 @@ const SelectVehicle = (props: Props) => {
 
   const handleSelectVehicle = (vehicle: Vehicle) => {
     dispatch(setSelectedVehicle(vehicle));
+    if (!user) {
+      router.push("credentials");
+    } else {
+      router.push("payment");
+    }
   };
 
   useEffect(() => {
@@ -105,40 +113,11 @@ const SelectVehicle = (props: Props) => {
         {/* VEHICLES */}
         {vehicles?.map((vehicle) => {
           return (
-            <div
+            <VehicleModule
               key={vehicle.id}
-              className="flex flex-row justify-between items-center bg-skin-secondary rounded my-2"
-            >
-              <div className="flex items-center gap-4">
-                <Image
-                  width={150}
-                  height={80}
-                  src={`http://localhost:3001/vehicles/image/${vehicle.imageName}`}
-                  alt="car"
-                />
-                <div>
-                  <div className="flex items-center gap-1">
-                    <ShoppingBagIcon className="h-4" />
-                    Max {vehicle.capacity}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <UserGroupIcon className="h-4" />
-                    Max {vehicle.capacity}
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col items-center p-4">
-                ${vehicle.basePrice}
-                <div onClick={() => handleSelectVehicle(vehicle)}>
-                  <Button
-                    title="Select"
-                    type="button"
-                    className="text-sm"
-                    hover={"hover:text-white hover:bg-black"}
-                  />
-                </div>
-              </div>
-            </div>
+              vehicle={vehicle}
+              handleSelectVehicle={handleSelectVehicle}
+            />
           );
         })}
       </div>

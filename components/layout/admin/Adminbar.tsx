@@ -29,7 +29,6 @@ const Adminbar = ({ user }: AdminbarProps) => {
             type="button"
             LeftIcon={PresentationChartBarIcon}
             className="text-sm"
-            hover={"hover:text-white hover:bg-black"}
           />
         </div>
       )}

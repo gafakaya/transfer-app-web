@@ -1,10 +1,28 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
+import { PhoneType } from "../../../src/types/Phone";
+import { SearchDropdown } from "../../tags/inputs";
+import { Button, H2 } from "../../tags";
 
-const PhoneNumber = () => {
-  const [countryState, setCountryState] = useState({
+type PhoneNumberProps = {
+  phoneNumber: string;
+  setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
+  phoneIdd: string;
+  setPhoneIdd: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const PhoneNumber = ({
+  phoneNumber,
+  setPhoneNumber,
+  phoneIdd,
+  setPhoneIdd,
+}: PhoneNumberProps) => {
+  const [countryState, setCountryState] = useState<{
+    loading: boolean;
+    countries: PhoneType[];
+    errorMessage: string;
+  }>({
     loading: false,
     countries: [],
     errorMessage: "",
@@ -20,7 +38,7 @@ const PhoneNumber = () => {
         });
 
         //  fetch data
-        const dataUrl = `https://restcountries.com/v3.1/all`;
+        const dataUrl = `https://restcountries.com/v3.1/all?fields=name,idd,flags`;
         const response = await axios.get(dataUrl);
         setCountryState({
           ...countryState,
@@ -39,83 +57,77 @@ const PhoneNumber = () => {
     fetchData();
   }, []);
   const { loading, errorMessage, countries } = countryState;
-  console.log("loading", loading);
-  console.log("countries", countries);
-  console.log("errorMessage", errorMessage);
+  const [selectedCountry, setSelectedCountry] = useState<PhoneType>();
 
-  const [selectedCountry, setSelectedCountry] = useState<any>();
-  console.log("selectedCountry", selectedCountry);
-
-  //   find selected country data
-  //search selected country
-  const searchSelectedCountry: any = countries.find((obj: any) => {
-    if (obj.name.common === selectedCountry) {
-      return true;
-    }
-    return false;
-  });
-  console.log("searchSelectedCountry", searchSelectedCountry);
+  const [options, setOptions] = useState<PhoneType[]>([]);
+  const onInputChange = (event: any) => {
+    setOptions(
+      countries.filter((option: PhoneType) =>
+        option.name.common.includes(event.target.value)
+      )
+    );
+  };
 
   return (
     <React.Fragment>
-      <div>
-        <div>
-          {loading === true ? (
-            <div className="flex">
-              <p className="text-sm">Loading...</p>
+      <H2>Phone Number</H2>
+      <div className="max-w-md">
+        {loading === true ? (
+          <div className="flex">
+            <p className="text-sm">Loading...</p>
+          </div>
+        ) : (
+          <div className="flex flex-col space-y-2">
+            <div>
+              <SearchDropdown
+                options={options}
+                onInputChange={onInputChange}
+                setSelectedCountry={setSelectedCountry}
+              />
             </div>
-          ) : (
-            <div className="flex flex-col space-y-2">
-              <div>
-                <select
-                  value={selectedCountry}
-                  onChange={(e) => setSelectedCountry(e.target.value)}
-                  className="outline-none w-[347px] bg-skin-secondary p-2 text-sm rounded"
-                >
-                  <option> Select Country </option>
-                  {countries.map((item: any) => {
-                    return (
-                      <option key={uuidv4()} value={item.name.common}>
-                        {item.name.common}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-              <div>
-                {searchSelectedCountry && (
-                  <div className="flex items-center space-x-1">
-                    <div className="flex space-x-2 items-center bg-skin-secondary p-1.5 rounded">
-                      <Image
-                        width={40}
-                        height={26}
-                        className="rounded-sm"
-                        src={
-                          searchSelectedCountry &&
-                          searchSelectedCountry.flags.png
-                        }
-                        alt="flag"
-                      />
-                      <p className="text-sm font-bold">
-                        {searchSelectedCountry &&
-                          searchSelectedCountry.idd.root}
-                        {searchSelectedCountry &&
-                          searchSelectedCountry.idd.suffixes}
-                      </p>
-                    </div>
-                    <div>
-                      <input
-                        type="tel"
-                        placeholder="Phone"
-                        className="w-64 h-[38px] text-sm p-2 outline-none rounded bg-skin-secondary"
-                      />
-                    </div>
+            <div>
+              {selectedCountry && (
+                <div className="flex items-center space-x-1">
+                  <div className="flex space-x-2 items-center bg-skin-secondary p-1.5 rounded">
+                    <Image
+                      width={40}
+                      height={26}
+                      className="rounded-sm"
+                      src={selectedCountry && selectedCountry.flags.png}
+                      alt="flag"
+                    />
+                    <p className="text-sm font-bold">
+                      {selectedCountry && selectedCountry.idd.root}
+                      {selectedCountry && selectedCountry.idd.suffixes}
+                    </p>
                   </div>
-                )}
-              </div>
+                  <div>
+                    <input
+                      type="tel"
+                      placeholder="Phone"
+                      className="w-[360px] h-[38px] text-sm p-2 outline-none rounded bg-skin-secondary"
+                      onChange={(e) => {
+                        setPhoneIdd(
+                          `${selectedCountry.idd.root}${selectedCountry.idd.suffixes}`
+                        );
+                        setPhoneNumber(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
+            <div>
+              {phoneNumber?.length == 10 && (
+                <Button
+                  title="Send code to my phone"
+                  type="button"
+                  className="text-sm mb-4"
+                />
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </React.Fragment>
   );

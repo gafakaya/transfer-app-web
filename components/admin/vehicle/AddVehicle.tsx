@@ -53,7 +53,7 @@ const AddVehicle = (props: Props) => {
   };
 
   return (
-    <div className="flex justify-between">
+    <div className="flex flex-col sm:flex-row justify-between">
       <div className="w-full">
         <H2>Add Vehicle</H2>
         <Formik
@@ -88,7 +88,6 @@ const AddVehicle = (props: Props) => {
                 type="submit"
                 LeftIcon={TruckIcon}
                 className="text-sm"
-                hover={"hover:text-white hover:bg-black"}
               />
             </div>
           </Form>
