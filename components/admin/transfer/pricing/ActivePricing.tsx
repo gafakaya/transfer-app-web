@@ -1,4 +1,4 @@
-import { CheckIcon, PencilIcon, TrashIcon } from "@heroicons/react/outline";
+import { CheckIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { Pricing } from "../../../../src/types/Pricing";
 import { H2 } from "../../../tags";

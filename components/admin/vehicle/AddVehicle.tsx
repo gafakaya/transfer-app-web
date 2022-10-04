@@ -1,4 +1,4 @@
-import { TruckIcon } from "@heroicons/react/outline";
+import { TruckIcon } from "@heroicons/react/24/outline";
 import { Formik, Form } from "formik";
 import React, { useState } from "react";
 import addVehicleImage from "../../../src/services/vehicles/add-vehicle-image";

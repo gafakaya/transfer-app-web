@@ -2,10 +2,10 @@ import React from "react";
 import NavbarItem from "./NavbarItem";
 import {
   HomeIcon,
-  LocationMarkerIcon,
-  PhoneIncomingIcon,
+  MapPinIcon,
   UserGroupIcon,
-} from "@heroicons/react/outline";
+  PhoneArrowDownLeftIcon
+} from "@heroicons/react/24/outline";
 
 type Props = {};
 
@@ -14,12 +14,12 @@ const Navbar = (props: Props) => {
     <nav className={`flex gap-4 justify-between items-center`}>
       <NavbarItem Icon={HomeIcon} title="Home" route="/" />
       <NavbarItem
-        Icon={LocationMarkerIcon}
+        Icon={MapPinIcon}
         title="Locations"
         route="/locations"
       />
       <NavbarItem Icon={UserGroupIcon} title="About Us" route="/about" />
-      <NavbarItem Icon={PhoneIncomingIcon} title="Contact" route="/contact" />
+      <NavbarItem Icon={PhoneArrowDownLeftIcon} title="Contact" route="/contact" />
     </nav>
   );
 };

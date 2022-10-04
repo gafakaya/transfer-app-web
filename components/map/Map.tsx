@@ -24,7 +24,7 @@ import {
   setDirections,
 } from "../../src/redux/slices/navSlice";
 import { useAppDispatch, useAppSelector } from "../../src/hooks/reduxHooks";
-import { ArrowRightIcon } from "@heroicons/react/outline";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { Button } from "../tags";
 // import Distance from "./distance";
 

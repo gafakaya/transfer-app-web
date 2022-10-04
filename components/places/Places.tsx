@@ -1,5 +1,5 @@
 import { Combobox, Transition } from "@headlessui/react";
-import { CheckIcon, LocationMarkerIcon } from "@heroicons/react/outline";
+import { CheckIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import usePlacesAutocomplete, {
   getDetails,
   getGeocode,
@@ -69,7 +69,7 @@ const Places = ({ locType }: PlacesProps) => {
               value={value}
               className="w-full mr-1 p-2 bg-skin-secondary outline-none  text-sm"
             />
-            <LocationMarkerIcon className="m-2 h-6" />
+            <MapPinIcon className="m-2 h-6" />
           </div>
 
           <Transition

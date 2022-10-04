@@ -1,4 +1,4 @@
-import { ShoppingBagIcon, UserGroupIcon } from "@heroicons/react/outline";
+import { ShoppingBagIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import React from "react";
 import { Vehicle } from "../../../src/types/Vehicle";

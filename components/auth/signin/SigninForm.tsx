@@ -3,7 +3,7 @@ import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
 import { Input } from "../../tags/inputs";
 import { Button } from "../../tags";
-import { LoginIcon } from "@heroicons/react/outline";
+import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline";
 import { useAppDispatch } from "../../../src/hooks/reduxHooks";
 import { setUser } from "../../../src/redux/slices/userSlice";
 import localSignin, {
@@ -43,7 +43,7 @@ const SigninForm = (props: Props) => {
         <div className={`flex flex-col gap-2 items-center mt-3 mb-2`}>
           <Button
             type="submit"
-            LeftIcon={LoginIcon}
+            LeftIcon={ArrowLeftOnRectangleIcon}
             title="Signin"
             className="gap-2 text-sm py-1 bg-black text-white"
           />

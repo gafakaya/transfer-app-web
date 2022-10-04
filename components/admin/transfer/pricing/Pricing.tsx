@@ -1,4 +1,7 @@
-import { PlusIcon, RefreshIcon } from "@heroicons/react/outline";
+import {
+  PlusIcon,
+  ArrowPathRoundedSquareIcon,
+} from "@heroicons/react/24/outline";
 import React, { useCallback, useEffect, useState } from "react";
 import {
   useAppDispatch,
@@ -61,7 +64,7 @@ const Pricing = (props: Props) => {
         rounded-md p-0.5 duration-300 transition-all"
           onClick={() => setRender(!render)}
         >
-          <RefreshIcon className="h-5" />
+          <ArrowPathRoundedSquareIcon className="h-5" />
         </div>
         <div
           className=" hover:bg-black hover:text-white

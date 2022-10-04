@@ -1,10 +1,10 @@
-import { SearchIcon } from "@heroicons/react/outline";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   ClockIcon,
-  LocationMarkerIcon,
+  MapPinIcon,
   XCircleIcon,
   CheckCircleIcon,
-} from "@heroicons/react/solid";
+} from "@heroicons/react/24/solid";
 import { useLoadScript } from "@react-google-maps/api";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
@@ -87,7 +87,7 @@ const Reservation = (props: Props) => {
       <div className="flex justify-center gap-2 md:max-w-xl">
         <div className="w-full" onClick={() => setIsHourlyRental(false)}>
           <Button
-            LeftIcon={LocationMarkerIcon}
+            LeftIcon={MapPinIcon}
             title="Transfer"
             type="button"
           />
@@ -137,7 +137,7 @@ const Reservation = (props: Props) => {
             )}
             <div className="flex gap-3 text-sm">
               <div onClick={() => nextStep()}>
-                <NavButton Icon={SearchIcon} text="Search Transfer" />
+                <NavButton Icon={MagnifyingGlassIcon} text="Search Transfer" />
               </div>
             </div>
           </div>
@@ -169,7 +169,7 @@ const Reservation = (props: Props) => {
           </div>
           <div className="flex gap-3 text-sm">
             <div onClick={() => nextStep()}>
-              <NavButton Icon={SearchIcon} text="Search Hourly" />
+              <NavButton Icon={MagnifyingGlassIcon} text="Search Hourly" />
             </div>
           </div>
         </div>

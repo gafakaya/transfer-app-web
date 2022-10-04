@@ -1,9 +1,4 @@
-import {
-  CheckIcon,
-  DotsVerticalIcon,
-  PencilIcon,
-  TrashIcon,
-} from "@heroicons/react/outline";
+import { CheckIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import deletePricing from "../../../../src/services/pricing/delete-pricing";
 import setActive from "../../../../src/services/pricing/set-active";

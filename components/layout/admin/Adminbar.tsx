@@ -1,7 +1,7 @@
 import {
   ChevronLeftIcon,
   PresentationChartBarIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import React from "react";
 import { User } from "../../../src/types/Auth";

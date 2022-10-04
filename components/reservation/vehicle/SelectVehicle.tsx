@@ -1,9 +1,9 @@
 import {
-  ArrowNarrowDownIcon,
+  ArrowLongDownIcon,
   CalendarIcon,
-  LocationMarkerIcon,
-} from "@heroicons/react/outline";
-import { ShoppingBagIcon, UserGroupIcon } from "@heroicons/react/solid";
+  MapPinIcon,
+} from "@heroicons/react/24/outline";
+import { ShoppingBagIcon, UserGroupIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
@@ -124,17 +124,17 @@ const SelectVehicle = (props: Props) => {
 
         <div className="flex flex-row gap-2 items-center p-2">
           <div>
-            <LocationMarkerIcon className="h-6" />
+            <MapPinIcon className="h-6" />
           </div>
           <div className="">{origin?.name}</div>
         </div>
 
         <div className="items-center px-2">
-          <ArrowNarrowDownIcon className="h-6" />
+          <ArrowLongDownIcon className="h-6" />
         </div>
         <div className="flex flex-row gap-1 items-center p-2">
           <div>
-            <LocationMarkerIcon className="h-6" />
+            <MapPinIcon className="h-6" />
           </div>
           <div>{destination?.name}</div>
         </div>
