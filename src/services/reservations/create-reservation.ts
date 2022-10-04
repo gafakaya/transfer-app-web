@@ -7,12 +7,18 @@ export type CreateReservationDataType = {
   destinationLng: number;
   destinationLat: number;
   destinationName: string;
-  departureTimestamp: number;
+  departureDate: Date;
   isRoundTrip?: boolean;
-  returnTimestamp?: number;
+  returnDate?: Date;
+  totalPrice: number;
+  distanceValue: number;
+  distanceText: string;
+  durationValue: number;
+  durationText: string;
+  vehicleId: string;
 };
 
-const creaateReservation = async (
+const createReservation = async (
   createReservationData: CreateReservationDataType
 ) => {
   try {
@@ -25,4 +31,4 @@ const creaateReservation = async (
   }
 };
 
-export default creaateReservation;
+export default createReservation;

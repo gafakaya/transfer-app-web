@@ -3,7 +3,7 @@ import { HeadingProps } from "./HeadingProps";
 
 const H1 = ({ children, className }: HeadingProps) => {
   return (
-    <div className={`text-2xl font-bold p-0.5 ${className} `}>
+    <div className={`text-2xl font-bold ${className} `}>
       {children}
     </div>
   );

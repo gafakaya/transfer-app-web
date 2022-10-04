@@ -1,12 +1,15 @@
 import { LoginIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import Head from "next/head";
-import {useRouter} from "next/router";
-import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { Reservation } from "../components/reservation";
 import { Button } from "../components/tags";
 import { useAppDispatch, useAppSelector } from "../src/hooks/reduxHooks";
 import { selectUser, setUser } from "../src/redux/slices/userSlice";
+import getAllOwnReservation from "../src/services/reservations/get-all-own-reservation";
+import getAllOwnUpToDateReservation from "../src/services/reservations/get-all-own-up-to-date-reservation";
+import getOwnReservation from "../src/services/reservations/get-own-reservation";
 import userMe from "../src/services/users/user-me";
 
 const Home: NextPage = () => {
@@ -22,6 +25,14 @@ const Home: NextPage = () => {
       };
       userCall();
     }
+    const getReservations = async () => {
+      const result1 = await getAllOwnReservation();
+      const result2 = await getAllOwnUpToDateReservation();
+      // const result2 = await getOwnReservation()
+      // console.log("Own: ", result1);
+      // console.log("Own Up To Date: ", result2);
+    };
+    getReservations();
   }, [user, dispatch]);
 
   return (

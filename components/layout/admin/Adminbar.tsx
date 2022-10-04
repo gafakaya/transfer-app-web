@@ -23,16 +23,22 @@ const Adminbar = ({ user }: AdminbarProps) => {
           <ChevronLeftIcon className="h-5" />
         </div>
       ) : (
-        <div className="" onClick={() => router.push("/admin")}>
+        <div>
           <Button
             title="Admin Panel"
             type="button"
             LeftIcon={PresentationChartBarIcon}
-            className="text-sm"
+            className="text-sm w-fit"
+            onClick={() => router.push("/admin")}
           />
         </div>
       )}
-      <div className="flex gap-1">
+      <div
+        className="flex gap-1 cursor-pointer"
+        onClick={() => {
+          router.push("/profile");
+        }}
+      >
         <div>{user?.firstName}</div>
         <div>{user?.lastName}</div>
       </div>

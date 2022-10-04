@@ -6,12 +6,15 @@ import {
 import { ShoppingBagIcon, UserGroupIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../src/hooks/reduxHooks";
 import {
   selectDestination,
+  selectDirections,
   selectOrigin,
   selectTimestamp,
+  selectTotalPrice,
+  setTotalPrice,
 } from "../../../src/redux/slices/navSlice";
 import {
   selectVehicles,
@@ -23,9 +26,16 @@ import { Vehicle } from "../../../src/types/Vehicle";
 import { Button } from "../../tags";
 import { H2 } from "../../tags/headings";
 import moment from "moment";
-import { timeStamp } from "console";
 import { selectUser } from "../../../src/redux/slices/userSlice";
 import VehicleModule from "./VehicleModule";
+import { useDistance } from "../../../src/hooks/useDistance";
+import { Price } from "../price";
+import {
+  selectActivePricing,
+  selectPricing,
+  setActivePricing,
+} from "../../../src/redux/slices/settingSlice";
+import getActivePricing from "../../../src/services/pricing/get-active-pricing";
 
 type Props = {};
 
@@ -35,9 +45,12 @@ const SelectVehicle = (props: Props) => {
   const origin = useAppSelector(selectOrigin);
   const destination = useAppSelector(selectDestination);
   const timestamp = useAppSelector(selectTimestamp);
+  const directions = useAppSelector(selectDirections);
   const user = useAppSelector(selectUser);
+  const activePricing = useAppSelector(selectActivePricing);
   const router = useRouter();
   const [date, setDate] = useState<Date>();
+  const [cost, setCost] = useState<number>(0);
 
   useEffect(() => {
     if (vehicles == null) {
@@ -48,31 +61,42 @@ const SelectVehicle = (props: Props) => {
       vehicles();
     }
 
-    if (origin == null || destination == null || timestamp == null) {
-      router.push("/");
+    if (activePricing == null) {
+      const getActivePricingFunc = async () => {
+        const result = await getActivePricing();
+        dispatch(setActivePricing(result?.data));
+      };
+      getActivePricingFunc();
     }
-  }, [vehicles, origin, destination, dispatch, timestamp, router]);
+
+    if (
+      origin == null ||
+      destination == null ||
+      timestamp == null ||
+      directions == null
+    ) {
+      router.push("/admin");
+    }
+  }, [
+    vehicles,
+    origin,
+    destination,
+    dispatch,
+    timestamp,
+    directions,
+    router,
+    activePricing,
+  ]);
 
   const handleSelectVehicle = (vehicle: Vehicle) => {
     dispatch(setSelectedVehicle(vehicle));
+    dispatch(setTotalPrice(cost + vehicle.basePrice));
     if (!user) {
       router.push("credentials");
     } else {
       router.push("payment");
     }
   };
-
-  useEffect(() => {
-    const handleFormatDate = (timestamp: any) => {
-      var date = new Date(timestamp);
-      return date;
-    };
-
-    const date = handleFormatDate(timestamp);
-    if (date) {
-      setDate(date);
-    }
-  }, [timestamp]);
 
   return (
     <div className="flex flex-col items-start sm:flex-row gap-2">
@@ -82,12 +106,18 @@ const SelectVehicle = (props: Props) => {
       >
         <div className="pl-2 mb-4 w-full p-2">
           <H2 className="mb-1">Reservation Details</H2>
-          <div className="flex justify-between items-center w-full pl-1">
-            <div>Departure Date & Time :</div>
+          <div className="flex flex-col justify-between w-full pl-1">
             <div>
-              {/*TODO USE MOMENT FORMAT */}
-              {date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()} -{" "}
-              {date?.getHours()}:{date?.getMinutes()}{" "}
+              {moment(timestamp).format("dddd, MMMM Do YYYY, h:mm:ss A")}
+            </div>
+            <div>
+              {directions && activePricing && (
+                <Price
+                  setCost={setCost}
+                  activePricing={activePricing}
+                  leg={directions.routes[0].legs[0]}
+                />
+              )}
             </div>
           </div>
         </div>

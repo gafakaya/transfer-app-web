@@ -34,10 +34,11 @@ const VehicleModule = ({
         </div>
       </div>
       <div className="flex flex-col items-center p-4">
-        ${vehicle?.basePrice}
+        +${vehicle?.basePrice}
         {handleSelectVehicle && (
-          <div onClick={() => handleSelectVehicle(vehicle)}>
+          <div>
             <Button
+              onClick={() => handleSelectVehicle(vehicle)}
               title="Select"
               type="button"
               className="text-sm"

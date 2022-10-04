@@ -11,10 +11,11 @@ type Loc = {
 type NavState = {
   origin: Loc | null;
   destination: Loc | null;
-  timestamp: number | null;
-  returnTimestamp: number | null;
+  timestamp: Date | null;
+  returnTimestamp: Date | null;
   stage: "origin" | "destination" | "date";
   directions: DirectionsResult | null;
+  totalPrice: number;
 };
 
 const initialState: NavState = {
@@ -24,6 +25,7 @@ const initialState: NavState = {
   returnTimestamp: null,
   stage: "origin",
   directions: null,
+  totalPrice: 0,
 };
 
 export const navSlice = createSlice({
@@ -36,16 +38,19 @@ export const navSlice = createSlice({
     setDestination: (state, action: PayloadAction<Loc>) => {
       state.destination = action.payload;
     },
-    setTimestamp: (state, action: PayloadAction<number>) => {
+    setTimestamp: (state, action: PayloadAction<Date>) => {
       state.timestamp = action.payload;
     },
-    setReturnTimestamp: (state, action: PayloadAction<number>) => {
+    setReturnTimestamp: (state, action: PayloadAction<Date>) => {
       state.returnTimestamp = action.payload;
     },
     setStage: (state, action: PayloadAction<"origin" | "destination">) => {
       state.stage = action.payload;
     },
-    setDirections: (state, action: PayloadAction<DirectionsResult>) => {
+    setTotalPrice: (state, action: PayloadAction<number>) => {
+      state.totalPrice = action.payload;
+    },
+    setDirections: (state, action) => {
       state.directions = action.payload;
     },
   },
@@ -58,6 +63,7 @@ export const {
   setReturnTimestamp,
   setStage,
   setDirections,
+  setTotalPrice,
 } = navSlice.actions;
 
 export const selectOrigin = (state: RootState) => state.nav.origin;
@@ -67,5 +73,6 @@ export const selectReturnTimestamp = (state: RootState) =>
   state.nav.returnTimestamp;
 export const selectState = (state: RootState) => state.nav.stage;
 export const selectDirections = (state: RootState) => state.nav.directions;
+export const selectTotalPrice = (state: RootState) => state.nav.totalPrice;
 
 export default navSlice.reducer;

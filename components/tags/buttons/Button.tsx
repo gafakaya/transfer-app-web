@@ -9,7 +9,7 @@ type ButtonProps = {
   title: string;
   hover?: string;
   className?: string;
-  onClick?: Function;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   onSubmit?: Function;
 };
 
@@ -36,7 +36,7 @@ const Button = ({
       transition-all duration-200
       ${hover ? hover : "hover:text-white hover:bg-black"} ${className}`}
       onSubmit={() => onSubmit}
-      onClick={() => onClick}
+      onClick={onClick}
       type={type}
     >
       <div className="flex items-center gap-2 mx-auto">

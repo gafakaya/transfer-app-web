@@ -3,12 +3,14 @@ import React from "react";
 import { useAppSelector } from "../../../src/hooks/reduxHooks";
 import {
   selectDestination,
+  selectDirections,
   selectOrigin,
   selectReturnTimestamp,
   selectTimestamp,
+  selectTotalPrice,
 } from "../../../src/redux/slices/navSlice";
 import { selectSelectedVehicle } from "../../../src/redux/slices/vehicleSlice";
-import creaateReservation, {
+import createReservation, {
   CreateReservationDataType,
 } from "../../../src/services/reservations/create-reservation";
 import { Button, H1 } from "../../tags";
@@ -21,12 +23,23 @@ const CreateReservation = (props: Props) => {
 
   const origin = useAppSelector(selectOrigin);
   const destination = useAppSelector(selectDestination);
+  const directions = useAppSelector(selectDirections);
   const timestamp = useAppSelector(selectTimestamp);
-  const returnTimestamp = useAppSelector(selectReturnTimestamp);
+  const totalPrice = useAppSelector(selectTotalPrice);
   const vehicle = useAppSelector(selectSelectedVehicle);
+  const returnTimestamp = useAppSelector(selectReturnTimestamp);
 
   const handleCreateReservation = async () => {
-    if (origin && destination && timestamp && vehicle) {
+    if (
+      origin &&
+      destination &&
+      timestamp &&
+      vehicle &&
+      directions &&
+      directions.routes[0].legs[0].distance &&
+      directions.routes[0].legs[0].duration &&
+      totalPrice
+    ) {
       const createReservationData: CreateReservationDataType = {
         originLng: origin.latLng.lng,
         originLat: origin.latLng.lat,
@@ -34,12 +47,18 @@ const CreateReservation = (props: Props) => {
         destinationLng: destination.latLng.lng,
         destinationLat: destination.latLng.lat,
         destinationName: destination.name,
-        departureTimestamp: timestamp,
+        departureDate: timestamp,
+        distanceValue: directions.routes[0].legs[0].distance.value,
+        distanceText: directions.routes[0].legs[0].distance.text,
+        durationValue: directions.routes[0].legs[0].duration.value,
+        durationText: directions.routes[0].legs[0].duration.text,
+        vehicleId: vehicle.id,
+        totalPrice: totalPrice,
       };
 
       console.log(createReservationData);
 
-      await creaateReservation(createReservationData)
+      await createReservation(createReservationData)
         .then((result: any) => {
           console.log(result);
         })
@@ -57,9 +76,12 @@ const CreateReservation = (props: Props) => {
         <div>{destination?.name}</div>
         <VehicleModule vehicle={vehicle} />
       </div>
-      <div onClick={() => handleCreateReservation()}>
-        <Button title="Create" type="button" />
-      </div>
+      <Button
+        title="Create"
+        type="button"
+        className="w-full"
+        onClick={() => handleCreateReservation()}
+      />
     </div>
   );
 };

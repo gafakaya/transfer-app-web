@@ -94,7 +94,7 @@ export default function Map({ mapRef }: MapProps) {
           />
         )}
 
-        {origin && (
+        {/* {origin && (
           <Marker
             position={origin}
             icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
@@ -105,11 +105,11 @@ export default function Map({ mapRef }: MapProps) {
             position={destination}
             icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
           />
-        )}
+        )} */}
       </GoogleMap>
-      <div className="w-fit" onClick={() => fetchDirections()}>
+      {/* <div className="w-fit" onClick={() => fetchDirections()}>
         <Button title="Create Directions" />
-      </div>
+      </div> */}
     </div>
   );
 }

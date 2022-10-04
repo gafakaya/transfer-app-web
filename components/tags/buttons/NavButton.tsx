@@ -17,9 +17,7 @@ function NavButton({ Icon, text, route }: NavButtonProps) {
       onClick={() => route && router.push(`/${route}`)}
     >
       <Image width={100} height={56} src="/car.png" alt="car" />
-      <p>
-        {text}
-      </p>
+      <p>{text}</p>
       <div className="w-fit rounded-full bg-black p-2">
         <ArrowRightIcon className="text-white h-5" />
       </div>
