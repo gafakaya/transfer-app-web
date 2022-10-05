@@ -15,7 +15,7 @@ const IconButton = ({
   className,
   onClick,
   onSubmit,
-  defaultHover,
+  defaultHover = true,
 }: IconButtonProps) => {
   return (
     <div
@@ -25,7 +25,7 @@ const IconButton = ({
       onClick={onClick}
       onSubmit={onSubmit}
     >
-      <Icon className={`${iconClassName} h-6`} />
+      <Icon className={`h-[22px] ${iconClassName}`} />
     </div>
   );
 };

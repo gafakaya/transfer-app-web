@@ -14,7 +14,6 @@ const NavbarItem = ({ Icon, title, route }: NavbarItemProps) => {
     <div className="place-items-end group">
       <IconButton
         Icon={Icon}
-        iconClassName={`h-[22px]`}
         className="bg-transparent"
         defaultHover={true}
         onClick={() => {

@@ -7,7 +7,7 @@ import updatePricing, {
 } from "../../../../src/services/pricing/update-pricing";
 import { Button, H2 } from "../../../tags";
 import { Input } from "../../../tags/inputs";
-import { UpdateType } from "./Pricing";
+import { UpdateType } from "./PricingSettings";
 
 type PricingUpdateFormProps = {
   update: UpdateType;

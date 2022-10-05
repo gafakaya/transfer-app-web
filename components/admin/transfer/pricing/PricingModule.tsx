@@ -4,7 +4,8 @@ import deletePricing from "../../../../src/services/pricing/delete-pricing";
 import setActive from "../../../../src/services/pricing/set-active";
 import { Pricing } from "../../../../src/types/Pricing";
 import { H2 } from "../../../tags";
-import { UpdateType } from "./Pricing";
+import { IconButton } from "../../../tags/buttons";
+import { UpdateType } from "./PricingSettings";
 
 type PricingModuleProps = {
   pricing: Pricing;
@@ -13,7 +14,7 @@ type PricingModuleProps = {
 
 const PricingModule = ({ pricing, setUpdate }: PricingModuleProps) => {
   return (
-    <div className="flex flex-col justify-between w-1/2 p-2 bg-skin-secondary mb-2 gap-1">
+    <div className="flex flex-col justify-between w-full p-2 bg-skin-secondary mb-2 gap-1">
       <div className="flex flex-col">
         <div>
           <span>Cost Gas Litre: </span>
@@ -29,34 +30,28 @@ const PricingModule = ({ pricing, setUpdate }: PricingModuleProps) => {
         </div>
       </div>
       <div className="flex flex-row items-center space-x-2">
-        <div
-          className=" hover:bg-black hover:text-white
-          rounded-md p-0.5 duration-300 transition-all"
+        <IconButton
+          Icon={CheckIcon}
+          iconClassName={`h-[20px]`}
           onClick={() => {
             setActive(pricing.id);
           }}
-        >
-          <CheckIcon className="h-5" />
-        </div>
-        <div
-          className="hover:bg-black hover:text-white
-          rounded-md p-0.5 duration-300 transition-all"
+        />
+        <IconButton
+          Icon={PencilIcon}
+          iconClassName={`h-[20px]`}
           onClick={() => {
             setUpdate({
               isUpdating: true,
               updatePricing: pricing,
             });
           }}
-        >
-          <PencilIcon className="h-5" />
-        </div>
-        <div
-          className="hover:bg-black hover:text-white
-          rounded-md p-0.5 duration-300 transition-all"
+        />
+        <IconButton
+          Icon={TrashIcon}
+          iconClassName={`h-[20px]`}
           onClick={() => deletePricing(pricing.id)}
-        >
-          <TrashIcon className="h-5" />
-        </div>
+        />
       </div>
     </div>
   );

@@ -1,8 +1,10 @@
 import { CheckIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import React from "react";
+import deletePricing from "../../../../src/services/pricing/delete-pricing";
 import { Pricing } from "../../../../src/types/Pricing";
 import { H2 } from "../../../tags";
-import { UpdateType } from "./Pricing";
+import { IconButton } from "../../../tags/buttons";
+import { UpdateType } from "./PricingSettings";
 
 type ActivePricingProps = {
   activePricing: Pricing | null;
@@ -15,7 +17,7 @@ const ActivePricing = ({ activePricing, setUpdate }: ActivePricingProps) => {
   return (
     <div>
       <H2>Active Pricing</H2>
-      <div className="flex flex-col w-1/2 p-2 bg-skin-secondary mb-2">
+      <div className="flex flex-col w-full p-2 bg-skin-secondary mb-2">
         <div>
           <span>Cost Gas Litre: </span>
           <span>{activePricing.costPerGasLitre}</span>
@@ -29,24 +31,16 @@ const ActivePricing = ({ activePricing, setUpdate }: ActivePricingProps) => {
           <span>{activePricing.pricePerKm}</span>
         </div>
         <div className="flex flex-row items-center space-x-2">
-          <div
-            className="hover:bg-black hover:text-white
-          rounded-md p-0.5 duration-300 transition-all"
+          <IconButton
+            Icon={PencilIcon}
+            iconClassName={`h-[20px]`}
             onClick={() => {
               setUpdate({
                 isUpdating: true,
                 updatePricing: activePricing,
               });
             }}
-          >
-            <PencilIcon className="h-5" />
-          </div>
-          <div
-            className="hover:bg-black hover:text-white
-          rounded-md p-0.5 duration-300 transition-all"
-          >
-            <TrashIcon className="h-5" />
-          </div>
+          />
         </div>
       </div>
     </div>

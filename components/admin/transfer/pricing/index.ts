@@ -1,3 +1,3 @@
-import Pricing from "./Pricing";
+import PricingSettings from "./PricingSettings";
 
-export { Pricing };
+export { PricingSettings };

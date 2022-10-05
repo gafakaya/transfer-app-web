@@ -17,6 +17,7 @@ import getActivePricing from "../../../../src/services/pricing/get-active-pricin
 import getAllPricing from "../../../../src/services/pricing/get-all-pricing";
 import { Pricing } from "../../../../src/types/Pricing";
 import { H1 } from "../../../tags";
+import { IconButton } from "../../../tags/buttons";
 import ActivePricing from "./ActivePricing";
 import PricingForm from "./PricingForm";
 import PricingList from "./PricingList";
@@ -29,7 +30,7 @@ export type UpdateType = {
   updatePricing: Pricing | null;
 };
 
-const Pricing = (props: Props) => {
+const PricingSettings = (props: Props) => {
   const dispatch = useAppDispatch();
   const pricing = useAppSelector(selectPricing);
   const activePricing = useAppSelector(selectActivePricing);
@@ -56,22 +57,15 @@ const Pricing = (props: Props) => {
   }, [activePricingFunc, pricingFunc, render]);
 
   return (
-    <div>
-      <H1>Pricing Settings</H1>
-      <div className="flex gap-2">
-        <div
-          className=" hover:bg-black hover:text-white
-        rounded-md p-0.5 duration-300 transition-all"
-          onClick={() => setRender(!render)}
-        >
-          <ArrowPathRoundedSquareIcon className="h-5" />
-        </div>
-        <div
-          className=" hover:bg-black hover:text-white
-        rounded-md p-0.5 duration-300 transition-all"
-          onClick={() => setCreate(!create)}
-        >
-          <PlusIcon className="h-5" />
+    <div className="flex flex-col">
+      <div className="flex items-center justify-between mb-4">
+        <H1>Pricing Settings</H1>
+        <div className="flex gap-2">
+          <IconButton
+            Icon={ArrowPathRoundedSquareIcon}
+            onClick={() => setRender(!render)}
+          />
+          <IconButton Icon={PlusIcon} onClick={() => setCreate(!create)} />
         </div>
       </div>
       {update.isUpdating && (
@@ -84,4 +78,4 @@ const Pricing = (props: Props) => {
   );
 };
 
-export default Pricing;
+export default PricingSettings;

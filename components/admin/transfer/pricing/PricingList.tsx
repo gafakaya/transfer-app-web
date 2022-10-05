@@ -1,7 +1,7 @@
 import React from "react";
 import { Pricing } from "../../../../src/types/Pricing";
 import { H1 } from "../../../tags";
-import { UpdateType } from "./Pricing";
+import { UpdateType } from "./PricingSettings";
 import PricingModule from "./PricingModule";
 
 type PricingListProps = {
@@ -12,7 +12,7 @@ type PricingListProps = {
 const PricingList = ({ pricingList, setUpdate }: PricingListProps) => {
   return (
     <div>
-      <H1>List</H1>
+      <hr className="border-[1px] border-skin-primary border-opacity-70 mb-2"></hr>
       {pricingList?.map((pricing) => {
         if (!pricing.isActive)
           return (
