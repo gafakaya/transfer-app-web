@@ -1,4 +1,5 @@
 import {
+  BanknotesIcon,
   BeakerIcon,
   ExclamationCircleIcon,
   PencilIcon,
@@ -13,7 +14,7 @@ type Props = {};
 const Test: NextPage = (props: Props) => {
   return (
     <div className={`flex gap-2`}>
-      <IconButton Icon={TrashIcon} />
+      <IconButton Icon={BanknotesIcon} />
       <IconButton Icon={TrashIcon} />
     </div>
   );

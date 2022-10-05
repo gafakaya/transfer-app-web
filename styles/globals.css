@@ -16,7 +16,7 @@
     --color-yellow: 221, 180, 29;
     --color-blue: 50, 173, 230;
   }
-  
+
 }
 
 .map-container {
@@ -24,3 +24,8 @@
   height: 50vh;
 }
 
+/* @layer components {
+  .navbar-tooltip {
+    @apply absolute w-auto p-1 min-w-max rounded-md shadow-md bg-skin-secondary text-sm transition-all duration-100 scale-0 origin-top;
+  }
+} */

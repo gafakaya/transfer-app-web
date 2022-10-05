@@ -1,4 +1,4 @@
-import { LoginIcon } from "@heroicons/react/outline";
+import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -44,16 +44,6 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        {!user && (
-          <div className="flex flex-row items-center gap-2">
-            <div onClick={() => router.push("/auth/signin")}>
-              <Button title="Login" type="button" LeftIcon={LoginIcon} />
-            </div>
-            <div onClick={() => router.push("/auth/signup")}>
-              <Button title="Signup" type="button" />
-            </div>
-          </div>
-        )}
         <Reservation />
       </main>
     </div>

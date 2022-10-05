@@ -7,10 +7,10 @@ type ButtonProps = {
   RightIcon?: any;
   RightIconClassName?: string;
   title: string;
-  hover?: string;
+  defaultHover?: boolean;
   className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  onSubmit?: Function;
+  onSubmit?: React.MouseEventHandler<HTMLDivElement>;
 };
 
 const Button = ({
@@ -20,26 +20,27 @@ const Button = ({
   RightIcon,
   RightIconClassName,
   title,
-  hover,
+  defaultHover = true,
   className,
   onClick,
   onSubmit,
 }: ButtonProps) => {
   return (
     <button
-      className={`flex gap-[6px] items-center
-      p-0.5 px-1.5 rounded-md
+      className={`flex items-center p-1 rounded-md
       text-center
+      text-sm
       w-full
-      border-2 border-skin-primary
+      bg-skin-secondary
       select-none cursor-pointer
       transition-all duration-200
-      ${hover ? hover : "hover:text-white hover:bg-black"} ${className}`}
+      ${defaultHover == true ? "hover:bg-skin-tertiary hover:shadow-sm" : ""}
+      ${className}`}
       onSubmit={() => onSubmit}
       onClick={onClick}
       type={type}
     >
-      <div className="flex items-center gap-2 mx-auto">
+      <div className="flex items-center gap-1 mx-auto">
         {LeftIcon && <LeftIcon className={`h-5 ${LeftIconClassName}`} />}
         <div>{title}</div>
         {RightIcon && <RightIcon className={`h-5 ${RightIconClassName}`} />}
