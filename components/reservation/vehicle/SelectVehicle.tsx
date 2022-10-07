@@ -69,14 +69,14 @@ const SelectVehicle = (props: Props) => {
       getActivePricingFunc();
     }
 
-    if (
-      origin == null ||
-      destination == null ||
-      timestamp == null ||
-      directions == null
-    ) {
-      router.push("/admin");
-    }
+    // if (
+    //   origin == null ||
+    //   destination == null ||
+    //   timestamp == null ||
+    //   directions == null
+    // ) {
+    //   router.push("/");
+    // }
   }, [
     vehicles,
     origin,
@@ -100,10 +100,7 @@ const SelectVehicle = (props: Props) => {
 
   return (
     <div className="flex flex-col items-start sm:flex-row gap-2">
-      <div
-        className="flex flex-col items-start my-2 mb-3 text-sm 
-      w-2/6  bg-skin-secondary rounded-md"
-      >
+      <div className="flex flex-col items-start my-2 text-sm w-full bg-skin-secondary rounded-md">
         <div className="pl-2 mb-4 w-full p-2">
           <H2 className="mb-1">Reservation Details</H2>
           <div className="flex flex-col justify-between w-full pl-1">
@@ -139,7 +136,7 @@ const SelectVehicle = (props: Props) => {
           <div>{destination?.name}</div>
         </div>
       </div>
-      <div className="flex-auto flex-col">
+      <div className="flex flex-col w-full">
         {/* VEHICLES */}
         {vehicles?.map((vehicle) => {
           return (

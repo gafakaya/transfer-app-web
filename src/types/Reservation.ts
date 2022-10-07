@@ -1,3 +1,5 @@
+import {Vehicle} from "./Vehicle";
+
 export type Reservation = {
   id: string;
   createdAt: Date;
@@ -18,4 +20,5 @@ export type Reservation = {
   returnDate: Date | null;
   userId: string | null;
   vehicleId: string | null;
+  vehicle: Vehicle
 };

@@ -14,7 +14,13 @@
 
     --color-red: 255, 68, 58;
     --color-yellow: 221, 180, 29;
-    --color-blue: 50, 173, 230;
+    --color-blue: 0, 122, 255;
+    --color-green: 52, 199, 89;
+
+
+    --color-border-primary: 216, 216, 220;
+    --color-border-secondary: 198, 198, 198;
+    --color-border-tertiary: 170, 170, 170;
   }
 
 }

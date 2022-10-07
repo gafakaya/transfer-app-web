@@ -26,6 +26,7 @@ module.exports = {
           red: withOpacity("--color-red"),
           yellow: withOpacity("--color-yellow"),
           blue: withOpacity("--color-blue"),
+          green: withOpacity("--color-green"),
         },
       },
       backgroundColor: {
@@ -36,15 +37,18 @@ module.exports = {
           red: withOpacity("--color-red"),
           yellow: withOpacity("--color-yellow"),
           blue: withOpacity("--color-blue"),
+          green: withOpacity("--color-green"),
         },
       },
       borderColor: {
         skin: {
-          primary: withOpacity("--color-text-primary"),
-          secondary: withOpacity("--color-text-secondary"),
+          primary: withOpacity("--color-border-primary"),
+          secondary: withOpacity("--color-border-secondary"),
+          tertiary: withOpacity("--color-border-tertiary"),
           red: withOpacity("--color-red"),
           yellow: withOpacity("--color-yellow"),
           blue: withOpacity("--color-blue"),
+          green: withOpacity("--color-green"),
         },
       },
     },

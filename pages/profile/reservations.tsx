@@ -4,16 +4,12 @@ import {
   OwnUpToDateReservations,
   OwnPastReservations,
 } from "../../components/profile";
+import { OwnReservations } from "../../components/profile/reservations";
 
 type Props = {};
 
 const Reservations: NextPage = (props: Props) => {
-  return (
-    <div>
-      <OwnUpToDateReservations />
-      <OwnPastReservations />
-    </div>
-  );
+  return <OwnReservations />;
 };
 
 export default Reservations;

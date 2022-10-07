@@ -30,12 +30,12 @@ const Button = ({
       className={`flex items-center p-1 rounded-md
       text-center
       text-sm
-      w-full
       bg-skin-secondary
       select-none cursor-pointer
       transition-all duration-200
-      ${defaultHover == true ? "hover:bg-skin-tertiary hover:shadow-sm" : ""}
-      ${className}`}
+      ${className}
+      w-full
+      ${defaultHover == true ? "hover:bg-skin-tertiary hover:shadow-sm" : ""} `}
       onSubmit={() => onSubmit}
       onClick={onClick}
       type={type}

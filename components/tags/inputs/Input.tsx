@@ -22,7 +22,7 @@ export const Input = ({ label, placeholder, ...props }: InputProps) => {
         type={type}
         {...field}
         className={`
-        ${className} rounded bg-skin-secondary w-full mr-1 p-2 outline-none border-0 text-sm focus:outline-none
+        ${className} rounded bg-skin-secondary w-full mr-1 p-1.5 outline-none border-0 text-sm focus:outline-none
         cursor-pointer`}
       />
       {hasError && <div>{meta.error}</div>}

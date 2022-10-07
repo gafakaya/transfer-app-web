@@ -1,4 +1,3 @@
-import OwnPastReservations from "./OwnPastReservations";
-import OwnUpToDateReservations from "./OwnUpToDateReservations";
+import OwnReservations from "./OwnReservations";
 
-export { OwnUpToDateReservations, OwnPastReservations };
+export { OwnReservations };

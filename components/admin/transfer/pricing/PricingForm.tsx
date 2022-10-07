@@ -29,17 +29,18 @@ const PricingForm = ({ setCreate }: PricingFormProps) => {
           });
         }}
       >
-        <Form className={`flex flex-col justify-center h-auto gap-2 w-1/2`}>
+        <Form className={`flex flex-col justify-center h-auto gap-2 w-full`}>
           <H2>Add pricing</H2>
           <Input name="litrePerKm" label="Litre Per Km" />
           <Input name="costPerGasLitre" label="Cost Per Gas Litre" />
           <Input name="pricePerKm" label="Price Per Km" />
-          <div className={`flex flex-col gap-2 items-center mt-3 mb-2`}>
+          <div className={`flex flex-col gap-2 items-center my-2`}>
             <Button title="Add Pricing" type="submit" className="text-sm" />
             <Button
               title="Cancel"
               type="button"
-              className="text-sm hover:bg-skin-red"
+              defaultHover={false}
+              className="text-sm bg-skin-red"
               onClick={() => {
                 setCreate(false);
               }}

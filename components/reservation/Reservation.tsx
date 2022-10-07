@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, TruckIcon } from "@heroicons/react/24/outline";
 import {
   ClockIcon,
   MapPinIcon,
@@ -20,7 +20,7 @@ import {
 import { setActivePricing } from "../../src/redux/slices/settingSlice";
 import getActivePricing from "../../src/services/pricing/get-active-pricing";
 import { Places } from "../places";
-import { Button, H1, NavButton } from "../tags";
+import { Button, H1, H2, NavButton } from "../tags";
 
 type Props = {};
 
@@ -86,11 +86,7 @@ const Reservation = (props: Props) => {
     <div className="flex flex-col gap-2 mt-2 mx-auto">
       <div className="flex justify-center gap-2 md:max-w-xl">
         <div className="w-full" onClick={() => setIsHourlyRental(false)}>
-          <Button
-            LeftIcon={MapPinIcon}
-            title="Transfer"
-            type="button"
-          />
+          <Button LeftIcon={MapPinIcon} title="Transfer" type="button" />
         </div>
 
         <div className="w-full" onClick={() => setIsHourlyRental(true)}>
@@ -102,15 +98,15 @@ const Reservation = (props: Props) => {
         <div>
           <div className="w-fit" onClick={() => setIsRoundTrip(!isRoundTrip)}>
             <Button
-              LeftIcon={isRoundTrip ? CheckCircleIcon : XCircleIcon}
+              LeftIcon={isRoundTrip ? XCircleIcon : CheckCircleIcon}
               title="Round Trip"
               type="button"
               className="border-none"
             />
           </div>
-          <div className="flex flex-col w-full gap-3">
+          <div className="flex flex-col w-full gap-3 mt-2">
             <div>
-              <H1>Where can we pick you up?</H1>
+              <H2>Where can we pick you up?</H2>
               <Places locType="origin" />
             </div>
             <div>
@@ -118,7 +114,7 @@ const Reservation = (props: Props) => {
               <Places locType="destination" />
             </div>
             <div className="">
-              <H1>Date?</H1>
+              <H2>Date?</H2>
               <input
                 type={"datetime-local"}
                 className="rounded bg-skin-secondary w-full mr-1 p-2.5 outline-none border-0 text-sm"
@@ -127,7 +123,7 @@ const Reservation = (props: Props) => {
             </div>
             {isRoundTrip && (
               <div className="">
-                <H1>Return Date?</H1>
+                <H2>Return Date?</H2>
                 <input
                   type={"datetime-local"}
                   className="rounded bg-skin-secondary w-full mr-1 p-2.5 outline-none border-0 text-sm"
@@ -135,17 +131,24 @@ const Reservation = (props: Props) => {
                 />
               </div>
             )}
-            <div className="flex gap-3 text-sm">
-              <div onClick={() => nextStep()}>
+            <div className="flex gap-3 text-sm w-1/2 ">
+              <Button
+                title="Next Step"
+                type="button"
+                RightIcon={TruckIcon}
+                onClick={() => nextStep()}
+                className="py-[10px]"
+              />
+              {/* <div onClick={() => nextStep()}>
                 <NavButton Icon={MagnifyingGlassIcon} text="Search Transfer" />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       ) : (
         <div className="flex flex-col w-full gap-3">
           <div>
-            <H1>Where can we pick you up?</H1>
+            <H2>Where can we pick you up?</H2>
             <Places locType="origin" />
           </div>
           <div className="">

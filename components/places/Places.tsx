@@ -69,7 +69,7 @@ const Places = ({ locType }: PlacesProps) => {
               value={value}
               className="w-full mr-1 p-2 bg-skin-secondary outline-none  text-sm"
             />
-            <MapPinIcon className="m-2 h-6" />
+            <MapPinIcon className="m-2 h-5" />
           </div>
 
           <Transition
@@ -84,19 +84,12 @@ const Places = ({ locType }: PlacesProps) => {
             <Combobox.Options className={"absolute"} static>
               {status === "OK" &&
                 data.map(({ place_id, description }) => (
-                  <Combobox.Option key={place_id} value={description}>
-                    {({ active, selected }) => (
-                      <li
-                        className={`flex items-center bg-skin-secondary text-sm p-2 ${
-                          active
-                            ? "bg-skin-tertiary text-skin-secondary cursor-pointer"
-                            : " text-skin-primary"
-                        }`}
-                      >
-                        {selected && <CheckIcon className="h-4 m-2 " />}
-                        {description}
-                      </li>
-                    )}
+                  <Combobox.Option
+                    key={place_id}
+                    value={description}
+                    className={`flex z-50 items-center bg-skin-secondary text-sm p-2 mt-1 text-skin-secondary cursor-pointer `}
+                  >
+                    {description}
                   </Combobox.Option>
                 ))}
             </Combobox.Options>
