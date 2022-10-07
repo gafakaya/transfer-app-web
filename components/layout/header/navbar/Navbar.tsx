@@ -2,14 +2,20 @@ import React, { useEffect } from "react";
 import NavbarItem from "./NavbarItem";
 import {
   HomeIcon,
-  MapPinIcon,
-  UserGroupIcon,
-  PhoneArrowDownLeftIcon,
   UserIcon,
   PresentationChartBarIcon,
   ArrowsRightLeftIcon,
   ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/outline";
+
+import {
+  HomeIcon as HomeIconSolid,
+  UserIcon as UserIconSolid,
+  PresentationChartBarIcon as PresentationChartBarIconSolid,
+  ArrowsRightLeftIcon as ArrowsRightLeftIconSolid,
+  ArrowLeftOnRectangleIcon as ArrowLeftOnRectangleIconSolid,
+} from "@heroicons/react/24/solid";
+
 import {
   useAppDispatch,
   useAppSelector,
@@ -45,10 +51,18 @@ const Navbar = (props: Props) => {
 
   return (
     <nav className={`flex gap-2 justify-between items-center`}>
-      <NavbarItem Icon={HomeIcon} route="/" title="Home" />
+      <NavbarItem
+        Icon={router.asPath === `/` ? HomeIconSolid : HomeIcon}
+        route="/"
+        title="Home"
+      />
       {handleRoles(user?.roles) && (
         <NavbarItem
-          Icon={PresentationChartBarIcon}
+          Icon={
+            router.asPath === `/admin`
+              ? PresentationChartBarIconSolid
+              : PresentationChartBarIcon
+          }
           route="/admin"
           title="Profile"
         />
@@ -70,12 +84,22 @@ const Navbar = (props: Props) => {
       )}
       {user && (
         <NavbarItem
-          Icon={ArrowsRightLeftIcon}
+          Icon={
+            router.asPath === `/profile/reservations`
+              ? ArrowsRightLeftIconSolid
+              : ArrowsRightLeftIcon
+          }
           route="/profile/reservations"
           title="Reservations"
         />
       )}
-      {user && <NavbarItem Icon={UserIcon} route="/profile" title="Profile" />}
+      {user && (
+        <NavbarItem
+          Icon={router.asPath === `/profile` ? UserIconSolid : UserIcon}
+          route="/profile"
+          title="Profile"
+        />
+      )}
     </nav>
   );
 };
