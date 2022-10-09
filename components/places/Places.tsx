@@ -42,7 +42,6 @@ const Places = ({ locType }: PlacesProps) => {
       dispatch(
         setDestination({
           latLng: { lat, lng },
-          placeId: results[0].place_id,
           name: results[0].formatted_address,
         })
       );
@@ -50,7 +49,6 @@ const Places = ({ locType }: PlacesProps) => {
       dispatch(
         setOrigin({
           latLng: { lat, lng },
-          placeId: results[0].place_id,
           name: results[0].formatted_address,
         })
       );

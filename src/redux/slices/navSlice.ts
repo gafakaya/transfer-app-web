@@ -4,7 +4,6 @@ import { RootState } from "../store";
 
 type Loc = {
   latLng: LatLngLiteral;
-  placeId: string;
   name: string;
 };
 

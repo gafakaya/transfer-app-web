@@ -13,11 +13,16 @@ import {
 } from "../../../src/redux/slices/userSlice";
 import getAllOwnUpToDateReservation from "../../../src/services/reservations/get-all-own-up-to-date-reservation";
 import { Button, H2 } from "../../tags";
+import { UpdateType } from "./OwnReservations";
 import ReservationModule from "./ReservationModule";
 
-type OwnUpToDateReservationsProps = {};
+type OwnUpToDateReservationsProps = {
+  setUpdate: React.Dispatch<React.SetStateAction<UpdateType>>;
+};
 
-const OwnUpToDateReservations = ({}: OwnUpToDateReservationsProps) => {
+const OwnUpToDateReservations = ({
+  setUpdate,
+}: OwnUpToDateReservationsProps) => {
   const dispatch = useAppDispatch();
   const ownUpToDateReservations = useAppSelector(selectOwnUpToDateReservations);
   const router = useRouter();
@@ -50,6 +55,7 @@ const OwnUpToDateReservations = ({}: OwnUpToDateReservationsProps) => {
                   type="uptodate"
                   reservation={ownUpToDateReservation}
                   handleRerender={handleRerender}
+                  setUpdate={setUpdate}
                 />
               </div>
             );

@@ -11,6 +11,7 @@ type ButtonProps = {
   className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   onSubmit?: React.MouseEventHandler<HTMLDivElement>;
+  size?: "small" | "middle" | "large";
 };
 
 const Button = ({
@@ -24,18 +25,20 @@ const Button = ({
   className,
   onClick,
   onSubmit,
+  size = "small",
 }: ButtonProps) => {
   return (
     <button
-      className={`flex items-center p-1 rounded-md
-      text-center
-      text-sm
-      bg-skin-secondary
-      select-none cursor-pointer
+      className={`flex items-center bg-skin-secondary
+      ${size == "small" && "p-1"}
+      ${size == "middle" && "p-[6px]"} 
+      ${size == "large" && "p-2"}
+      rounded-md
+      text-center text-sm select-none cursor-pointer
       transition-all duration-200
-      ${className}
       w-full
-      ${defaultHover == true ? "hover:bg-skin-tertiary hover:shadow-sm" : ""} `}
+      ${defaultHover == true ? "hover:bg-skin-tertiary hover:shadow-sm" : ""} 
+      ${className} `}
       onSubmit={() => onSubmit}
       onClick={onClick}
       type={type}
