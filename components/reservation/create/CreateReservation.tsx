@@ -14,7 +14,7 @@ import createReservation, {
   CreateReservationDataType,
 } from "../../../src/services/reservations/create-reservation";
 import { Button, H1 } from "../../tags";
-import VehicleModule from "../vehicle/VehicleModule";
+import VehicleElement from "../../vehicle/VehicleElement";
 
 type Props = {};
 
@@ -56,8 +56,6 @@ const CreateReservation = (props: Props) => {
         totalPrice: totalPrice,
       };
 
-      console.log(createReservationData);
-
       await createReservation(createReservationData)
         .then((result: any) => {
           console.log(result);
@@ -74,7 +72,7 @@ const CreateReservation = (props: Props) => {
       <div>
         <div>{origin?.name}</div>
         <div>{destination?.name}</div>
-        <VehicleModule vehicle={vehicle} />
+        <VehicleElement vehicle={vehicle} />
       </div>
       <Button
         title="Create"

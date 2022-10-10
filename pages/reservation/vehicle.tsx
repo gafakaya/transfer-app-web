@@ -1,15 +1,11 @@
 import { NextPage } from "next";
 import React from "react";
-import { SelectVehicle } from "../../components/reservation";
+import { SelectVehicleStep } from "../../components/reservation/create";
 
 type Props = {};
 
 const Vehicle: NextPage = (props: Props) => {
-  return (
-    <div>
-      <SelectVehicle />
-    </div>
-  );
+  return <SelectVehicleStep />;
 };
 
 export default Vehicle;

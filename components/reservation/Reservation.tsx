@@ -9,6 +9,7 @@ import { useLoadScript } from "@react-google-maps/api";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../src/hooks/reduxHooks";
+import useDiections from "../../src/hooks/useDirections";
 import {
   selectDestination,
   selectOrigin,
@@ -24,10 +25,18 @@ import { Button, H1, H2, NavButton } from "../tags";
 
 type Props = {};
 
+const libraries: (
+  | "places"
+  | "drawing"
+  | "geometry"
+  | "localContext"
+  | "visualization"
+)[] = ["places"];
+
 const Reservation = (props: Props) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: ["places"],
+    libraries,
   });
 
   const [isRoundTrip, setIsRoundTrip] = useState(false);
@@ -42,6 +51,8 @@ const Reservation = (props: Props) => {
   const dispatch = useAppDispatch();
   const origin = useAppSelector(selectOrigin);
   const destination = useAppSelector(selectDestination);
+
+  const directions = useDiections({ origin, destination });
 
   if (!isLoaded) return <div>Loading...</div>;
 
@@ -59,26 +70,9 @@ const Reservation = (props: Props) => {
       console.log("Wrong date type");
     }
   };
-  const fetchDirections = () => {
-    if (!origin) return;
-    if (!destination) return;
-    const service = new google.maps.DirectionsService();
-    service.route(
-      {
-        origin: origin.latLng,
-        destination: destination.latLng,
-        travelMode: google.maps.TravelMode.DRIVING,
-      },
-      (result, status) => {
-        if (status === "OK" && result) {
-          dispatch(setDirections(result));
-        }
-      }
-    );
-  };
 
   const nextStep = () => {
-    fetchDirections();
+    dispatch(setDirections(directions));
     router.push("/reservation/vehicle");
   };
 

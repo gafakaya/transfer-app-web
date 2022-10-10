@@ -1,3 +1,5 @@
 import CreateReservation from "./CreateReservation";
+import LocDateStep from "./LocDateStep";
+import SelectVehicleStep from "./SelectVehicleStep";
 
-export { CreateReservation };
+export { CreateReservation, SelectVehicleStep, LocDateStep };

@@ -1,26 +1,25 @@
+import { BanknotesIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { useAppDispatch } from "../../../src/hooks/reduxHooks";
+import usePrice from "../../../src/hooks/usePrice";
 import { Pricing } from "../../../src/types/Pricing";
 import { H1 } from "../../tags";
 
 type PriceProps = {
   leg: google.maps.DirectionsLeg;
   activePricing: Pricing;
-  setCost: React.Dispatch<React.SetStateAction<number>>;
+  setPrice: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const Price = ({ leg, activePricing, setCost }: PriceProps) => {
-  const litreCostKM = activePricing.litrePerKm * activePricing.costPerGasLitre;
+const Price = ({ leg, activePricing, setPrice }: PriceProps) => {
+  const price = usePrice({ leg, activePricing });
   if (!leg.distance || !leg.duration) return null;
-  const cost = Math.floor(
-    (leg.distance.value / 1000) * litreCostKM * activePricing.pricePerKm
-  );
-  setCost(cost);
+  console.log("Price", price);
+  setPrice(price);
   return (
-    <div>
-      <div>Distance: {leg.distance.text}</div>
-      <div>Price: {cost}</div>
-      <div>Duration: {leg.duration.text}</div>
+    <div className="flex gap-1.5 items-center bg-skin-green px-2 py-0.5 rounded-lg">
+      <BanknotesIcon className="h-5" />
+      <span className="">{price}$</span>
     </div>
   );
 };

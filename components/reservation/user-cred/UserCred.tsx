@@ -94,7 +94,6 @@ const UserCred = (props: Props) => {
                 type="submit"
                 title="Signup"
                 className="gap-2 text-sm py-1 bg-black text-white"
-                hover="hover:bg-opacity-80"
               />
             </div>
           </Form>

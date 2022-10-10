@@ -16,13 +16,14 @@ import Image from "next/image";
 import deleteReservation from "../../../src/services/reservations/delete-reservation";
 import { Reservation } from "../../../src/types/Reservation";
 import { IconButton } from "../../tags/buttons";
+import VehicleElement from "../../vehicle/VehicleElement";
 import { UpdateType } from "./OwnReservations";
 
 type ReservationModuleProps = {
   reservation: Reservation;
   type: "uptodate" | "past";
-  handleRerender: () => void;
-  setUpdate: React.Dispatch<React.SetStateAction<UpdateType>>;
+  handleRerender?: () => void;
+  setUpdate?: React.Dispatch<React.SetStateAction<UpdateType>>;
 };
 
 const ReservationModule = ({
@@ -61,30 +62,7 @@ const ReservationModule = ({
         </div>
       </div>
       <hr className="border-skin-tertiary" />
-      <div className="flex flex-col justify-between text-sm my-1">
-        <div className="flex items-start gap-1.5 mb-1">
-          <TruckIcon className="h-5" />
-          <span className="">{vehicle?.vehicleName}</span>
-        </div>
-        <div className="flex justify-between items-center gap-4">
-          <div>
-            <div className="flex items-center gap-1">
-              <ShoppingBagIcon className="h-4" />
-              Max {vehicle?.capacity}
-            </div>
-            <div className="flex items-center gap-1">
-              <UserGroupIcon className="h-4" />
-              Max {vehicle?.capacity}
-            </div>
-          </div>
-          <Image
-            width={100}
-            height={60}
-            src={`http://localhost:3001/vehicles/image/${vehicle?.imageName}`}
-            alt="car"
-          />
-        </div>
-      </div>
+      <VehicleElement vehicle={vehicle} />
       <hr className="border-skin-tertiary" />
       <div className="flex justify-between text-sm mt-1">
         <div className="flex gap-1.5 items-center bg-skin-green px-2 py-0.5 rounded-lg">
@@ -104,7 +82,7 @@ const ReservationModule = ({
           </span>
         </div>
       </div>
-      {type == "uptodate" && (
+      {type == "uptodate" && handleRerender && setUpdate && (
         <div className="flex w-full justify-between gap-1">
           <div>
             <IconButton Icon={ChatBubbleBottomCenterTextIcon} />
