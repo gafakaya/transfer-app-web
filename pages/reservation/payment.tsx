@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import React from "react";
-import { PaymentModule } from "../../components/reservation/payment";
+import { PaymentModule } from "../../components/payment";
 
 type Props = {};
 

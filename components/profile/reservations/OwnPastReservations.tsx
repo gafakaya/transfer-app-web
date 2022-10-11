@@ -6,6 +6,7 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../src/hooks/reduxHooks";
+import useAPICall from "../../../src/hooks/useAPICall";
 import {
   selectOwnPastReservations,
   selectOwnUpToDateReservations,
@@ -15,40 +16,29 @@ import {
 import getAllOwnPastReservation from "../../../src/services/reservations/get-all-own-past-reservation";
 import getAllOwnUpToDateReservation from "../../../src/services/reservations/get-all-own-up-to-date-reservation";
 import { Button, H2 } from "../../tags";
-import ReservationModule from "./ReservationModule";
+import ReservationModule from "../../reservation/ReservationElement";
+import ReservationList from "../../reservation/ReservationList";
 
 type Props = {};
 
 const OwnPastReservations = (props: Props) => {
   const dispatch = useAppDispatch();
+  useAPICall({
+    setState: setOwnPastReservations,
+    apiFunc: getAllOwnPastReservation,
+    select: selectOwnPastReservations,
+  });
   const ownPastReservations = useAppSelector(selectOwnPastReservations);
   const router = useRouter();
-
-  useEffect(() => {
-    if (ownPastReservations == null) {
-      const getAOUTDR = async () => {
-        const result = await getAllOwnPastReservation();
-        dispatch(setOwnPastReservations(result?.data));
-      };
-      getAOUTDR();
-    }
-  }, [ownPastReservations, dispatch]);
 
   return (
     <div>
       {ownPastReservations?.length != 0 ? (
         <div>
           <H2>Past Reservations</H2>
-          {ownPastReservations?.map((ownPastReservation) => {
-            return (
-              <div key={ownPastReservation.id}>
-                <ReservationModule
-                  type="past"
-                  reservation={ownPastReservation}
-                />
-              </div>
-            );
-          })}
+          {ownPastReservations && (
+            <ReservationList reservations={ownPastReservations} type="past" />
+          )}
         </div>
       ) : (
         <div></div>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { DirectionsResult } from "../types/googleMaps";
 
-const useDiections = ({ origin, destination }: any) => {
+const useDirections = ({ origin, destination }: any) => {
   const [directions, setDirections] = useState<DirectionsResult>();
 
   useEffect(() => {
@@ -25,4 +25,4 @@ const useDiections = ({ origin, destination }: any) => {
   return directions;
 };
 
-export default useDiections;
+export default useDirections;

@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import React from "react";
-import { UserCred } from "../../components/reservation/user-cred";
+import { UserCred } from "../../components/auth/user-cred";
 
 type Props = {};
 

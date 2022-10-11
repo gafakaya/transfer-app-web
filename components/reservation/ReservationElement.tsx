@@ -13,25 +13,26 @@ import {
 } from "@heroicons/react/24/outline";
 import moment from "moment";
 import Image from "next/image";
-import deleteReservation from "../../../src/services/reservations/delete-reservation";
-import { Reservation } from "../../../src/types/Reservation";
-import { IconButton } from "../../tags/buttons";
-import VehicleElement from "../../vehicle/VehicleElement";
-import { UpdateType } from "./OwnReservations";
+import deleteReservation from "../../src/services/reservations/delete-reservation";
+import { Reservation } from "../../src/types/Reservation";
+import { IconButton } from "../tags/buttons";
+import VehicleElement from "../vehicle/VehicleElement";
+import { UpdateType } from "../profile/reservations/OwnReservations";
+import { ReservationTypes } from "./ReservationList";
 
-type ReservationModuleProps = {
+type ReservationElementProps = {
   reservation: Reservation;
-  type: "uptodate" | "past";
+  type: ReservationTypes;
   handleRerender?: () => void;
   setUpdate?: React.Dispatch<React.SetStateAction<UpdateType>>;
 };
 
-const ReservationModule = ({
+const ReservationElement = ({
   reservation,
   type,
   handleRerender,
   setUpdate,
-}: ReservationModuleProps) => {
+}: ReservationElementProps) => {
   const { vehicle } = reservation;
   return (
     <div
@@ -82,7 +83,7 @@ const ReservationModule = ({
           </span>
         </div>
       </div>
-      {type == "uptodate" && handleRerender && setUpdate && (
+      {type == "uptodate" && handleRerender && (
         <div className="flex w-full justify-between gap-1">
           <div>
             <IconButton Icon={ChatBubbleBottomCenterTextIcon} />
@@ -95,7 +96,7 @@ const ReservationModule = ({
                 handleRerender();
               }}
             />
-            <IconButton
+            {/* <IconButton
               Icon={PencilSquareIcon}
               onClick={() => {
                 setUpdate({
@@ -104,7 +105,7 @@ const ReservationModule = ({
                 });
                 console.log("RR", reservation);
               }}
-            />
+            /> */}
           </div>
         </div>
       )}
@@ -112,4 +113,4 @@ const ReservationModule = ({
   );
 };
 
-export default ReservationModule;
+export default ReservationElement;

@@ -1,8 +1,8 @@
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
-import { Button, H1 } from "../../tags";
-import { Input } from "../../tags/inputs";
+import { Button, H1 } from "../tags";
+import { Input } from "../tags/inputs";
 
 type Props = {};
 
