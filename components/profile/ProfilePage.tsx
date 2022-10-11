@@ -1,0 +1,41 @@
+import { useRouter } from "next/router";
+import React from "react";
+import { useAppSelector } from "../../src/hooks/reduxHooks";
+import useAPICall from "../../src/hooks/useAPICall";
+import { selectUser, setUser } from "../../src/redux/slices/userSlice";
+import userMe from "../../src/services/users/user-me";
+import { H1, Button } from "../tags";
+import { UserElement } from "../user";
+
+type Props = {};
+
+const ProfilePage = (props: Props) => {
+  const router = useRouter();
+  useAPICall({
+    setState: setUser,
+    apiFunc: userMe,
+    select: selectUser,
+  });
+  const user = useAppSelector(selectUser);
+
+  if (user == null) return <div></div>;
+
+  return (
+    <div>
+      <div className="p-2 bg-skin-secondary rounded-md">
+        <UserElement user={user} showJoinDate={true} />
+      </div>
+      <Button
+        title="Go to reservations"
+        type="button"
+        className="mt-2 w-fit"
+        size="large"
+        onClick={() => {
+          router.push("/profile/reservations");
+        }}
+      />
+    </div>
+  );
+};
+
+export default ProfilePage;

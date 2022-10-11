@@ -1,3 +1,13 @@
-import { OwnUpToDateReservations, OwnPastReservations } from "./reservations";
+import ProfilePage from "./ProfilePage";
+import {
+  OwnUpToDateReservations,
+  OwnPastReservations,
+  OwnReservations,
+} from "./reservations";
 
-export { OwnUpToDateReservations, OwnPastReservations };
+export {
+  OwnUpToDateReservations,
+  OwnPastReservations,
+  OwnReservations,
+  ProfilePage,
+};
