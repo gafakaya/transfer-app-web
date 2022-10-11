@@ -6,18 +6,18 @@ import React, { useCallback, useEffect, useState } from "react";
 import {
   useAppDispatch,
   useAppSelector,
-} from "../../../../src/hooks/reduxHooks";
+} from "../../../src/hooks/reduxHooks";
 import {
   selectActivePricing,
   selectPricing,
   setActivePricing,
   setPricing,
-} from "../../../../src/redux/slices/settingSlice";
-import getActivePricing from "../../../../src/services/pricing/get-active-pricing";
-import getAllPricing from "../../../../src/services/pricing/get-all-pricing";
-import { Pricing } from "../../../../src/types/Pricing";
-import { H1 } from "../../../tags";
-import { IconButton } from "../../../tags/buttons";
+} from "../../../src/redux/slices/settingSlice";
+import getActivePricing from "../../../src/services/pricing/get-active-pricing";
+import getAllPricing from "../../../src/services/pricing/get-all-pricing";
+import { Pricing } from "../../../src/types/Pricing";
+import { H1 } from "../../tags";
+import { IconButton } from "../../tags/buttons";
 import ActivePricing from "./ActivePricing";
 import PricingForm from "./PricingForm";
 import PricingList from "./PricingList";

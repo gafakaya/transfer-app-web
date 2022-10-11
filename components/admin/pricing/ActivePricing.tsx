@@ -1,9 +1,9 @@
 import { CheckIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import React from "react";
-import deletePricing from "../../../../src/services/pricing/delete-pricing";
-import { Pricing } from "../../../../src/types/Pricing";
-import { H2 } from "../../../tags";
-import { IconButton } from "../../../tags/buttons";
+import deletePricing from "../../../src/services/pricing/delete-pricing";
+import { Pricing } from "../../../src/types/Pricing";
+import { H2 } from "../../tags";
+import { IconButton } from "../../tags/buttons";
 import { UpdateType } from "./PricingSettings";
 
 type ActivePricingProps = {

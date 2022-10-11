@@ -1,9 +1,9 @@
 import { Form, Formik } from "formik";
 import createPricing, {
   CreatePricingDataType,
-} from "../../../../src/services/pricing/create-pricing";
-import { Button, H2 } from "../../../tags";
-import { Input } from "../../../tags/inputs";
+} from "../../../src/services/pricing/create-pricing";
+import { Button, H2 } from "../../tags";
+import { Input } from "../../tags/inputs";
 
 type PricingFormProps = {
   setCreate: React.Dispatch<React.SetStateAction<boolean>>;

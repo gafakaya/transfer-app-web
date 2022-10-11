@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import React from "react";
-import { PricingSettings } from "../../components/admin/transfer/pricing";
+import { PricingSettings } from "../../components/admin/pricing";
 
 type Props = {};
 

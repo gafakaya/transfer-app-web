@@ -1,6 +1,6 @@
 import React from "react";
-import { Pricing } from "../../../../src/types/Pricing";
-import { H1 } from "../../../tags";
+import { Pricing } from "../../../src/types/Pricing";
+import { H1 } from "../../tags";
 import { UpdateType } from "./PricingSettings";
 import PricingModule from "./PricingModule";
 

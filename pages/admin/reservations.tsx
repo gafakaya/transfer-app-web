@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
-import AllPastReservations from "../../components/admin/transfer/reservations/AllPastReservations";
-import AllUpToDateReservations from "../../components/admin/transfer/reservations/AllUpToDateReservations";
+import AllPastReservations from "../../components/admin/reservations/AllPastReservations";
+import AllUpToDateReservations from "../../components/admin/reservations/AllUpToDateReservations";
 
 type Props = {};
 

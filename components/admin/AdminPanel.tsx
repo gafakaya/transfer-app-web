@@ -2,7 +2,7 @@ import { TruckIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import React from "react";
 import { Button, H1 } from "../tags";
-import { PricingSettings } from "./transfer/pricing";
+import { PricingSettings } from "./pricing";
 import { AddVehicle } from "./vehicle";
 
 type Props = {};
