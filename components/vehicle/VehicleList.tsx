@@ -10,9 +10,10 @@ import VehicleElement from "./VehicleElement";
 
 type VehicleListProps = {
   handleSelectVehicle?: any;
+  price?: number;
 };
 
-const VehicleList = ({ handleSelectVehicle }: VehicleListProps) => {
+const VehicleList = ({ handleSelectVehicle, price }: VehicleListProps) => {
   const dispatch = useAppDispatch();
   useAPICall({
     setState: setVehicles,
@@ -24,19 +25,21 @@ const VehicleList = ({ handleSelectVehicle }: VehicleListProps) => {
   return (
     <div className="flex flex-col w-full">
       {/* VEHICLES */}
-      {vehicles?.map((vehicle) => {
-        return (
-          <div
-            key={vehicle.id}
-            className={`flex flex-col gap-2 bg-skin-secondary my-1 p-1.5 rounded-md hover:bg-opacity-80`}
-          >
-            <VehicleElement
-              vehicle={vehicle}
-              handleSelectVehicle={handleSelectVehicle}
-            />
-          </div>
-        );
-      })}
+      {vehicles &&
+        vehicles.map((vehicle) => {
+          return (
+            <div
+              key={vehicle.id}
+              className={`flex flex-col gap-2 bg-skin-secondary my-1 p-1.5 rounded-md hover:bg-opacity-80`}
+            >
+              <VehicleElement
+                vehicle={vehicle}
+                handleSelectVehicle={handleSelectVehicle}
+                price={price}
+              />
+            </div>
+          );
+        })}
     </div>
   );
 };

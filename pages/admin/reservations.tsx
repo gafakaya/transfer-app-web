@@ -1,15 +1,13 @@
 import { NextPage } from "next";
 import React from "react";
-import AllPastReservations from "../../components/admin/reservations/AllPastReservations";
-import AllUpToDateReservations from "../../components/admin/reservations/AllUpToDateReservations";
+import { AdminReservationPage } from "../../components/admin/reservations";
 
 type Props = {};
 
 const Reservations: NextPage = (props: Props) => {
   return (
     <div>
-      <AllUpToDateReservations />
-      <AllPastReservations />
+      <AdminReservationPage />
     </div>
   );
 };

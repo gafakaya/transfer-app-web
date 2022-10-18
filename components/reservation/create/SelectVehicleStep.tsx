@@ -54,10 +54,10 @@ const SelectVehicleStep = (props: Props) => {
       timestamp == null ||
       directions == null
     ) {
-      console.log("Origin", origin);
-      console.log("destination", destination);
-      console.log("directions", directions);
-      console.log("timestamp", timestamp);
+      // console.log("Origin", origin);
+      // console.log("destination", destination);
+      // console.log("directions", directions);
+      // console.log("timestamp", timestamp);
       router.push("/");
     }
   }, [origin, destination, dispatch, timestamp, directions, router]);
@@ -66,11 +66,7 @@ const SelectVehicleStep = (props: Props) => {
     dispatch(setSelectedVehicle(vehicle));
     console.log("Selected", vehicle);
     dispatch(setTotalPrice(price + vehicle.basePrice));
-    if (!user) {
-      router.push("credentials");
-    } else {
-      router.push("payment");
-    }
+    router.push("credentials");
   };
 
   return (
@@ -118,13 +114,14 @@ const SelectVehicleStep = (props: Props) => {
                 setPrice={setPrice}
                 activePricing={activePricing}
                 leg={directions.routes[0].legs[0]}
+                visible={false}
               />
             )}
           </div>
         </div>
       </div>
       <div className="sm:w-1/2">
-        <VehicleList handleSelectVehicle={handleSelectVehicle} />
+        <VehicleList handleSelectVehicle={handleSelectVehicle} price={price} />
       </div>
     </div>
   );

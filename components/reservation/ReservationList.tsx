@@ -8,26 +8,36 @@ type ReservationListProps = {
   reservations: Reservation[];
   type: ReservationTypes;
   handleRerender?: () => void;
+  filterByEmail?: string;
 };
 
 const ReservationList = ({
   reservations,
   type,
   handleRerender,
+  filterByEmail,
 }: ReservationListProps) => {
   return (
     <div>
-      {reservations?.map((reservations) => {
-        return (
-          <div key={reservations.id}>
-            <ReservationElement
-              type={type}
-              reservation={reservations}
-              handleRerender={handleRerender}
-            />
-          </div>
-        );
-      })}
+      {reservations
+        ?.filter((reservation) => {
+          if (filterByEmail) {
+            return reservation.user.email.includes(filterByEmail);
+          } else {
+            return reservation;
+          }
+        })
+        .map((reservation) => {
+          return (
+            <div key={reservation.id}>
+              <ReservationElement
+                type={type}
+                reservation={reservation}
+                handleRerender={handleRerender}
+              />
+            </div>
+          );
+        })}
     </div>
   );
 };

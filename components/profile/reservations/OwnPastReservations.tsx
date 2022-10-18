@@ -15,7 +15,7 @@ import {
 } from "../../../src/redux/slices/userSlice";
 import getAllOwnPastReservation from "../../../src/services/reservations/get-all-own-past-reservation";
 import getAllOwnUpToDateReservation from "../../../src/services/reservations/get-all-own-up-to-date-reservation";
-import { Button, H2 } from "../../tags";
+import { Button, H2, H3 } from "../../tags";
 import ReservationModule from "../../reservation/ReservationElement";
 import ReservationList from "../../reservation/ReservationList";
 
@@ -35,7 +35,7 @@ const OwnPastReservations = (props: Props) => {
     <div>
       {ownPastReservations?.length != 0 ? (
         <div>
-          <H2>Past Reservations</H2>
+          <H3>Past Reservations</H3>
           {ownPastReservations && (
             <ReservationList reservations={ownPastReservations} type="past" />
           )}

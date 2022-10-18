@@ -8,9 +8,10 @@ import { PhoneType } from "../../../src/types/Phone";
 import localSignup, {
   SignupDataType,
 } from "../../../src/services/auth/local-signup";
-import { setUser } from "../../../src/redux/slices/userSlice";
+import { setCred, setUser } from "../../../src/redux/slices/userSlice";
 import { useAppDispatch } from "../../../src/hooks/reduxHooks";
 import { useRouter } from "next/router";
+import { Cred } from "../../../src/types/Auth";
 
 type Props = {};
 
@@ -43,20 +44,16 @@ const UserCred = (props: Props) => {
             firstName: "",
             lastName: "",
             trId: "",
-            password: "",
           }}
           onSubmit={async (values) => {
-            const signupUserInput: SignupDataType = {
+            const cred: Cred = {
               ...values,
               phoneNumber,
               phoneIdd,
             };
 
-            await localSignup(signupUserInput)
-              .then((result: any) => {
-                dispatch(setUser(result));
-              })
-              .catch((err: any) => console.log(err));
+            dispatch(setCred(cred));
+            router.push("payment");
           }}
         >
           <Form className={`flex flex-col justify-center h-auto gap-2`}>
@@ -87,13 +84,13 @@ const UserCred = (props: Props) => {
               type="text"
             />
 
-            <Input label="Password" name="password" type="password" />
-
             <div className={`flex flex-col gap-2 items-center mt-3 mb-2`}>
               <Button
                 type="submit"
-                title="Signup"
-                className="gap-2 text-sm py-1 bg-black text-white"
+                title="Next Step"
+                size={"large"}
+                className="gap-2 text-sm bg-black text-white"
+                defaultHover={false}
               />
             </div>
           </Form>

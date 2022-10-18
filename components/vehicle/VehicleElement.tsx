@@ -5,19 +5,29 @@ import {
   BanknotesIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Vehicle } from "../../src/types/Vehicle";
 import { Button } from "../tags";
 
 type VehicleElementProps = {
-  vehicle: Vehicle | null;
+  vehicle: Vehicle;
   handleSelectVehicle?: any;
+  price?: number;
 };
 
 const VehicleElement = ({
   vehicle,
   handleSelectVehicle,
+  price,
 }: VehicleElementProps) => {
+  const [totalPrice, setTotalPrice] = useState(vehicle.basePrice);
+
+  useEffect(() => {
+    if (price) {
+      setTotalPrice(vehicle.basePrice + price);
+    }
+  }, [price, vehicle.basePrice]);
+
   return (
     <div className="flex flex-col justify-between text-sm px-1">
       <div className="flex justify-between items-center">
@@ -48,7 +58,7 @@ const VehicleElement = ({
         <div className="flex items-center justify-between w-fit gap-2 py-2">
           <div className="flex gap-1.5 items-center bg-skin-green px-2.5 py-1 rounded-lg">
             <BanknotesIcon className="h-5" />
-            <span className="">{vehicle?.basePrice}$</span>
+            <span className="">{totalPrice}$</span>
           </div>
           <Button
             title="Select"

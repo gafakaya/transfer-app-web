@@ -14,3 +14,12 @@ export interface User {
   lastName: string;
   roles: Role[];
 }
+
+export type Cred = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  phoneIdd: string;
+  trId: string;
+};

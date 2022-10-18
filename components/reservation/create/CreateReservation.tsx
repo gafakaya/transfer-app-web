@@ -72,7 +72,7 @@ const CreateReservation = (props: Props) => {
       <div>
         <div>{origin?.name}</div>
         <div>{destination?.name}</div>
-        <VehicleElement vehicle={vehicle} />
+        {vehicle && <VehicleElement vehicle={vehicle} />}
       </div>
       <Button
         title="Create"

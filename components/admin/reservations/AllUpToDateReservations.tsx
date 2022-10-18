@@ -9,11 +9,15 @@ import {
 } from "../../../src/redux/slices/settingSlice";
 import getAllUpToDateReservation from "../../../src/services/reservations/get-all-up-to-date-reservation";
 import ReservationList from "../../reservation/ReservationList";
-import { H2 } from "../../tags";
+import { H2, H3 } from "../../tags";
 
-type Props = {};
+type AllUpToDateReservationsProps = {
+  filterByEmail?: string;
+};
 
-const AllUpToDateReservations = (props: Props) => {
+const AllUpToDateReservations = ({
+  filterByEmail,
+}: AllUpToDateReservationsProps) => {
   const dispatch = useAppDispatch();
   useAPICall({
     setState: setAllUpToDateReservations,
@@ -24,15 +28,16 @@ const AllUpToDateReservations = (props: Props) => {
   const router = useRouter();
 
   return (
-    <>
-      <H2>All Up To Date Reservations</H2>
+    <div>
+      <H3>All Up To Date Reservations</H3>
       {allUpToDateReservations && (
         <ReservationList
           reservations={allUpToDateReservations}
           type={"uptodate" || "all"}
+          filterByEmail={filterByEmail}
         />
       )}
-    </>
+    </div>
   );
 };
 

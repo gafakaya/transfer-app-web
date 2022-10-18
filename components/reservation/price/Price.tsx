@@ -9,18 +9,30 @@ type PriceProps = {
   leg: google.maps.DirectionsLeg;
   activePricing: Pricing;
   setPrice: React.Dispatch<React.SetStateAction<number>>;
+  visible?: boolean;
 };
 
-const Price = ({ leg, activePricing, setPrice }: PriceProps) => {
+const Price = ({
+  leg,
+  activePricing,
+  setPrice,
+  visible = true,
+}: PriceProps) => {
   const price = usePrice({ leg, activePricing });
   if (!leg.distance || !leg.duration) return null;
   console.log("Price", price);
   setPrice(price);
   return (
-    <div className="flex gap-1.5 items-center bg-skin-green px-2 py-0.5 rounded-lg">
-      <BanknotesIcon className="h-5" />
-      <span className="">{price}$</span>
-    </div>
+    <>
+      {visible == true ? (
+        <div className="flex gap-1.5 items-center bg-skin-green px-2 py-0.5 rounded-lg">
+          <BanknotesIcon className="h-5" />
+          <span className="">{price}$</span>
+        </div>
+      ) : (
+        <div></div>
+      )}
+    </>
   );
 };
 

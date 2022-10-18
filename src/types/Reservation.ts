@@ -1,4 +1,5 @@
-import {Vehicle} from "./Vehicle";
+import { User } from "./Auth";
+import { Vehicle } from "./Vehicle";
 
 export type Reservation = {
   id: string;
@@ -19,6 +20,7 @@ export type Reservation = {
   isRoundTrip: boolean | null;
   returnDate: Date | null;
   userId: string | null;
+  user: User;
   vehicleId: string | null;
-  vehicle: Vehicle
+  vehicle: Vehicle;
 };

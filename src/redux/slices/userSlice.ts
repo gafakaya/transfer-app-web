@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../types/Auth";
+import { Cred, User } from "../../types/Auth";
 import { Reservation } from "../../types/Reservation";
 import { RootState } from "../store";
 
@@ -8,6 +8,7 @@ type UserState = {
   ownUpToDateReservations: Reservation[] | null;
   ownPastReservations: Reservation[] | null;
   ownReservations: Reservation[] | null;
+  cred: Cred | null;
 };
 
 const initialState: UserState = {
@@ -15,6 +16,7 @@ const initialState: UserState = {
   ownUpToDateReservations: null,
   ownPastReservations: null,
   ownReservations: null,
+  cred: null,
 };
 
 export const userSlice = createSlice({
@@ -33,12 +35,16 @@ export const userSlice = createSlice({
     setOwnReservations: (state, action) => {
       state.ownReservations = action.payload;
     },
+    setCred: (state, action) => {
+      state.cred = action.payload;
+    },
   },
 });
 
 export const { setUser } = userSlice.actions;
 export const { setOwnUpToDateReservations } = userSlice.actions;
 export const { setOwnPastReservations } = userSlice.actions;
+export const { setCred } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user.user;
 export const selectOwnUpToDateReservations = (state: RootState) =>
@@ -47,4 +53,5 @@ export const selectOwnPastReservations = (state: RootState) =>
   state.user.ownPastReservations;
 export const selectOwnReservations = (state: RootState) =>
   state.user.ownReservations;
+export const selectCred = (state: RootState) => state.user.cred;
 export default userSlice.reducer;

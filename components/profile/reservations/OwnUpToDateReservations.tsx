@@ -14,7 +14,7 @@ import {
 } from "../../../src/redux/slices/userSlice";
 import getAllOwnUpToDateReservation from "../../../src/services/reservations/get-all-own-up-to-date-reservation";
 import ReservationList from "../../reservation/ReservationList";
-import { Button, H2 } from "../../tags";
+import { Button, H2, H3 } from "../../tags";
 import { UpdateType } from "./OwnReservations";
 import ReservationModule from "../../reservation/ReservationElement";
 
@@ -44,7 +44,7 @@ const OwnUpToDateReservations = ({
     <div>
       {ownUpToDateReservations?.length != 0 ? (
         <div>
-          <H2>Up To Date Reservations</H2>
+          <H3>Up To Date Reservations</H3>
           {ownUpToDateReservations && (
             <ReservationList
               reservations={ownUpToDateReservations}

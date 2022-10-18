@@ -9,11 +9,13 @@ import {
 } from "../../../src/redux/slices/settingSlice";
 import getAllPastReservation from "../../../src/services/reservations/get-all-past-reservation";
 import ReservationList from "../../reservation/ReservationList";
-import { H2 } from "../../tags";
+import { H2, H3 } from "../../tags";
 
-type Props = {};
+type AllPastReservationsProps = {
+  filterByEmail?: string;
+};
 
-const AllPastReservations = (props: Props) => {
+const AllPastReservations = ({ filterByEmail }: AllPastReservationsProps) => {
   const dispatch = useAppDispatch();
   useAPICall({
     setState: setAllPastReservations,
@@ -24,15 +26,16 @@ const AllPastReservations = (props: Props) => {
   const router = useRouter();
 
   return (
-    <>
-      <H2>All Past Reservations</H2>
+    <div>
+      <H3>All Past Reservations</H3>
       {allPastReservations && (
         <ReservationList
           reservations={allPastReservations}
           type={"past" || "all"}
+          filterByEmail={filterByEmail}
         />
       )}
-    </>
+    </div>
   );
 };
 
