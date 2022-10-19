@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { useAppSelector } from "../../src/hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../src/hooks/reduxHooks";
 import useAPICall from "../../src/hooks/useAPICall";
 import { selectUser, setUser } from "../../src/redux/slices/userSlice";
+import logout from "../../src/services/auth/logout";
 import userMe from "../../src/services/users/user-me";
 import { H1, Button } from "../tags";
 import { UserElement } from "../user";
@@ -10,6 +11,7 @@ import { UserElement } from "../user";
 type Props = {};
 
 const ProfilePage = (props: Props) => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
   useAPICall({
     setState: setUser,
@@ -17,6 +19,15 @@ const ProfilePage = (props: Props) => {
     select: selectUser,
   });
   const user = useAppSelector(selectUser);
+
+  const handleLogout = async () => {
+    await logout().then((result) => {
+      if (result?.data == true) {
+        dispatch(setUser(null));
+        router.push("/");
+      }
+    });
+  };
 
   if (user == null) return <div></div>;
 
@@ -33,6 +44,13 @@ const ProfilePage = (props: Props) => {
         onClick={() => {
           router.push("/profile/reservations");
         }}
+      />
+      <Button
+        title="Logout"
+        type="button"
+        className="mt-2 w-fit"
+        size="large"
+        onClick={() => handleLogout()}
       />
     </div>
   );

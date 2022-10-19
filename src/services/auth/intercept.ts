@@ -32,7 +32,11 @@ api.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest.retry) {
+    if (
+      error.response.status === 401 &&
+      !originalRequest.retry &&
+      localStorage.getItem(`AT_KEY`)
+    ) {
       originalRequest.retry = true;
       await refresh();
       return api(originalRequest);

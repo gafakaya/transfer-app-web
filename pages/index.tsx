@@ -3,7 +3,6 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Reservation } from "../components/reservation";
 import { LocDateStep } from "../components/reservation/create";
 import { Button } from "../components/tags";
 import { useAppDispatch, useAppSelector } from "../src/hooks/reduxHooks";
@@ -19,21 +18,23 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (user == null) {
+    if (user == null && localStorage.getItem(`AT_KEY`)) {
       const userCall = async () => {
         const result = await userMe();
         dispatch(setUser(result?.data));
       };
       userCall();
     }
-    const getReservations = async () => {
-      const result1 = await getAllOwnReservation();
-      const result2 = await getAllOwnUpToDateReservation();
-      // const result2 = await getOwnReservation()
-      // console.log("Own: ", result1);
-      // console.log("Own Up To Date: ", result2);
-    };
-    getReservations();
+    if (localStorage.getItem(`AT_KEY`) && user) {
+      const getReservations = async () => {
+        const result1 = await getAllOwnReservation();
+        const result2 = await getAllOwnUpToDateReservation();
+        // const result2 = await getOwnReservation()
+        // console.log("Own: ", result1);
+        // console.log("Own Up To Date: ", result2);
+      };
+      getReservations();
+    }
   }, [user, dispatch]);
 
   return (
